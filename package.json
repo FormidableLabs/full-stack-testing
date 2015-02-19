@@ -37,5 +37,21 @@
   "scripts": {
     "test": "gulp build check",
     "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FormidableLabs/full-stack-testing"
+  },
+  "keywords": [
+    "test",
+    "full stack",
+    "selenium",
+    "chai",
+    "mocha"
+  ],
+  "author": "Ryan Roemer <ryan.roemer@formidablelabs.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FormidableLabs/full-stack-testing/issues"
   }
 }
