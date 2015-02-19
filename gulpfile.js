@@ -1,7 +1,6 @@
 /**
  * Gulpfile
  */
-// TODO[RYAN] var webpack = require("webpack");
 var _ = require("lodash");
 
 // Gulp
@@ -18,9 +17,10 @@ var mocha = require("gulp-mocha");
 var istanbul = require("gulp-istanbul");
 
 // Build imports
-var prodBuild = null; // TODO require("./webpack.config");
-var devBuild = null; // TODO require("./webpack.config.dev");
-var testBuild = null; // TODO require("./webpack.config.test");
+var webpack = require("webpack");
+var prodBuild = require("./webpack.config");
+var devBuild = require("./webpack.config.dev");
+var testBuild = require("./webpack.config.test");
 
 // Log colors
 var cyan = gutil.colors.cyan;
@@ -245,10 +245,9 @@ gulp.task("check:all", ["check:base", "test:all"]);
 // Builders
 // ----------------------------------------------------------------------------
 // Create webpack task.
-var _webpack = function () {
-
+var _webpack = function (cfg) {
   // Single compiler for caching.
-  var compiler = { run: function () {} }; // TODO[RYAN] : reenable.webpack(cfg);
+  var compiler = webpack(cfg);
 
   return function (done) {
     compiler.run(function (err, stats) {
