@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - 0.10
+
+before_install:
+  # GUI for real browsers.
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  # Verify all builds actually work.
+  - npm run-script build
+  - ./node_modules/.bin/gulp build:dev
+  - ./node_modules/.bin/gulp build:test
+  # Run all checks.
+  - ./node_modules/.bin/gulp check:ci
