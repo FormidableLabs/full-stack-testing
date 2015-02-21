@@ -16,19 +16,19 @@
         <p>Camel, snake and dasherize to awesomeness!</p>
       </div>
       <div class="input-group">
-        <div class="input-group-btn">
+        <div class="js-input input-group-btn">
           <button type="button" class="btn btn-default dropdown-toggle"
                   data-toggle="dropdown" aria-expanded="false"
-                  >Action <span class="caret"></span></button>
+                  >Convert! <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a class="js-convert" data-convert="camel" href="#">Camel</a></li>
+            <li><a class="js-convert" data-convert="snake" href="#">Snake</a></li>
+            <li><a class="js-convert" data-convert="dash" href="#">Dash</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a class="js-convert" data-convert="all" href="#">All the things!</a></li>
           </ul>
         </div>
-        <input type="text" class="form-control" placeholder="Search for...">
+        <input type="text" class="form-control" placeholder="Text to convert...">
       </div>
     </div>
     <script src="/app/js-dist/bundle.js"></script>
