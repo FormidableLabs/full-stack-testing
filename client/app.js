@@ -5,14 +5,43 @@ var $ = require("jquery");
 require("bootstrap"); // Empty require to enable bootstrap JS
 
 $(function () {
-  var $output = $("<code style='font-size: 2em' />")
-  $output.text("TODO: Write an App!")
-  $output.appendTo($("<div style='margin-top: 20px' />")
-    .appendTo($(".container")));
+  // TODO[RYAN]: Decompose into UI / functional components / files.
 
-  $(".js-convert").on("click", function (ev) {
+  // Stash selectors.
+  var $input = $(".js-input");
+  var $convert = $(".js-convert-label");
+
+  // Set default conversion type.
+  var convertType = "camel";
+
+  // Update the conversion type and label.
+  var _updateType = function ($el) {
+    convertType = $el.data("convert");
+    $convert.html($el.html());
+  };
+
+  // Start off with first conversion option as default.
+  _updateType($(".js-convert").first());
+
+  // Listen and update conversion type on clicks.
+  $(".js-convert").click(function (ev) {
     ev.preventDefault();
-    var convertType = $(ev.currentTarget).data("convert");
-    console.log("TODO HERE CONVERT TYPE", convertType);
+    _updateType($(ev.currentTarget));
+  });
+
+  // Perform the actual conversion request and UI update.
+  var _convertText = function () {
+    var input = $input.val();
+    /*eslint-disable no-console */
+    console.log("TODO: ACTION", convertType, input);
+    /*eslint-enable no-console */
+  };
+
+  // Listen and submit action.
+  $(".js-action").click(_convertText);
+  $input.keydown(function (ev) {
+    if (ev.which === 13 /* Enter key */) {
+      _convertText();
+    }
   });
 });
