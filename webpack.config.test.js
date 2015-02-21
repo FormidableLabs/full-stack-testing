@@ -7,7 +7,7 @@ var prodCfg = require("./webpack.config");
 
 module.exports = _.extend({}, _.omit(prodCfg, "plugins"), {
   cache: true,
-  context: path.join(__dirname, "client/test"),
+  context: path.join(__dirname, "test/client"),
   entry: "./main",
   output: {
     path: path.join(__dirname, "app/js-test"),

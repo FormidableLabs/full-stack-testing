@@ -299,19 +299,17 @@ gulp.task("clean", [
 // -----------
 // Production
 // -----------
-gulp.task("build:prod-js", ["clean:dist"], _webpack(prodBuild));
-gulp.task("build:prod", ["build:prod-js"]);
+gulp.task("build:prod", _webpack(prodBuild));
 gulp.task("watch:prod", function () {
-  gulp.watch(FRONTEND_JS_APP_FILES, ["build:prod-js"]);
+  gulp.watch(FRONTEND_JS_APP_FILES, ["build:prod"]);
 });
 
 // -----------
 // Development
 // -----------
-gulp.task("build:dev-js", ["clean:dist"], _webpack(devBuild));
-gulp.task("build:dev", ["build:dev-js"]);
+gulp.task("build:dev", _webpack(devBuild));
 gulp.task("watch:dev", function () {
-  gulp.watch(FRONTEND_JS_APP_FILES, ["build:dev-js"]);
+  gulp.watch(FRONTEND_JS_APP_FILES, ["build:dev"]);
 });
 gulp.task("watch", ["watch:dev"]);
 
