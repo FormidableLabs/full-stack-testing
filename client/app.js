@@ -9,22 +9,23 @@ $(function () {
 
   // Stash selectors.
   var $input = $(".js-input");
-  var $convert = $(".js-convert-label");
+  var $convertLabel = $(".js-convert-label");
+  var $convertTypes = $(".js-convert");
 
-  // Set default conversion type.
-  var convertType = "camel";
+  // Set default conversion types.
+  var convertTypes = ["camel"];
 
   // Update the conversion type and label.
   var _updateType = function ($el) {
-    convertType = $el.data("convert");
-    $convert.html($el.html());
+    convertTypes = $el.data("convert").split(",");
+    $convertLabel.html($el.html());
   };
 
   // Start off with first conversion option as default.
-  _updateType($(".js-convert").first());
+  _updateType($convertTypes.first());
 
   // Listen and update conversion type on clicks.
-  $(".js-convert").click(function (ev) {
+  $convertTypes.click(function (ev) {
     ev.preventDefault();
     _updateType($(ev.currentTarget));
   });
@@ -33,7 +34,7 @@ $(function () {
   var _convertText = function () {
     var input = $input.val();
     /*eslint-disable no-console */
-    console.log("TODO: ACTION", convertType, input);
+    console.log("TODO: ACTION", convertTypes, input);
     /*eslint-enable no-console */
   };
 
