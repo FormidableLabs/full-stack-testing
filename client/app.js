@@ -9,6 +9,7 @@ $(function () {
 
   // Stash selectors.
   var $input = $(".js-input");
+  var $output = $(".js-output");
   var $convertLabel = $(".js-convert-label");
   var $convertTypes = $(".js-convert");
 
@@ -30,12 +31,29 @@ $(function () {
     _updateType($(ev.currentTarget));
   });
 
+  // Create HTML with results.
+  // TODO: See http://getbootstrap.com/components/#panels-heading
+
   // Perform the actual conversion request and UI update.
   var _convertText = function () {
     var input = $input.val();
-    /*eslint-disable no-console */
-    console.log("TODO: ACTION", convertTypes, input);
-    /*eslint-enable no-console */
+
+    // TODO[RYAN]: Switch to real UI.
+    // TODO[RYAN]: Decompose better?
+    var $temp = $("<code />");
+    $output
+      .css({ "margin-top": "20px" })
+      .empty()
+      .append($("<pre />").append($temp));
+
+    // Iterate all conversion types, make AJAX request and update UI.
+    $.each(convertTypes, function (i, type) {
+      $.get("/api/" + type, function (data) {
+        var text = $temp.text();
+        text = text ? text + "\n\n" : "";
+        $temp.text(text + JSON.stringify(data, null, 2));
+      });
+    });
   };
 
   // Listen and submit action.
