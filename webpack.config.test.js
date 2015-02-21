@@ -18,5 +18,8 @@ module.exports = _.extend({}, _.omit(prodCfg, "plugins"), {
     alias: {
       client: path.join(__dirname, "client")
     }
-  })
+  }),
+  plugins: [
+    prodCfg._PLUGIN_MAP.PROVIDE
+  ]
 });

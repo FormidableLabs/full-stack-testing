@@ -3,14 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Converter</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
   </head>
   <body>
-    <h1>Converter</h1>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>The Converter!</h1>
+        <p>Camel, snake and dasherize to awesomeness!</p>
+      </div>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown" aria-expanded="false"
+                  >Action <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div>
+        <input type="text" class="form-control" placeholder="Search for...">
+      </div>
+    </div>
     <script src="/app/js-dist/bundle.js"></script>
   </body>
 </html>

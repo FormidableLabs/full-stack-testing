@@ -10,11 +10,16 @@ var PLUGIN_MAP = {
   SOURCE_MAPS: new webpack.SourceMapDevToolPlugin(
     "../js-map/bundle.js.map",
     "\n//# sourceMappingURL=http://127.0.0.1:3001/app/js-map/[url]"
-  )
+  ),
+
+  // Make globals available.
+  PROVIDE: new webpack.ProvidePlugin({
+    jQuery: "jquery"
+  })
 };
 
 module.exports = {
-  _PLUGIN_MAP: PLUGIN_MAP, // Proxy to dev. config.
+  _PLUGIN_MAP: PLUGIN_MAP, // Proxy to other configs.
   cache: true,
   context: path.join(__dirname, "client"),
   entry: "./app.js",
@@ -27,6 +32,7 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
 
-    PLUGIN_MAP.SOURCE_MAPS
+    PLUGIN_MAP.SOURCE_MAPS,
+    PLUGIN_MAP.PROVIDE
   ]
 };
