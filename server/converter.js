@@ -12,7 +12,9 @@
  * @returns {String}      camel-cased string
  */
 function camel(val) {
-  return "TODO: camel " + val;
+  return (val || "").replace(/[-_](.)/g, function (m, first) {
+    return first.toUpperCase();
+  });
 }
 
 /**
