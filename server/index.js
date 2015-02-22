@@ -12,17 +12,16 @@ app.use("/node_modules", express.static("node_modules"));
 app.use("/", express.static("app/public"));
 
 // Application REST endpoints.
-app.use(require("body-parser").json());
 app.get("/api/camel", function (req, res) {
-  var from = req.body.from || "";
+  var from = req.query.from || "";
   res.json({ from: from, to: converter.camel(from) });
 });
 app.get("/api/snake", function (req, res) {
-  var from = req.body.from || "";
+  var from = req.query.from || "";
   res.json({ from: from, to: converter.snake(from) });
 });
 app.get("/api/dash", function (req, res) {
-  var from = req.body.from || "";
+  var from = req.query.from || "";
   res.json({ from: from, to: converter.dash(from) });
 });
 

@@ -48,7 +48,7 @@ $(function () {
 
     // Iterate all conversion types, make AJAX request and update UI.
     $.each(convertTypes, function (i, type) {
-      $.get("/api/" + type, function (data) {
+      $.get("/api/" + type, { from: input }, function (data) {
         var text = $temp.text();
         text = text ? text + "\n\n" : "";
         $temp.text(text + JSON.stringify(data, null, 2));
