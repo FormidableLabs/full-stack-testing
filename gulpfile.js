@@ -250,6 +250,7 @@ var _webpack = function (cfg) {
   var compiler = webpack(cfg);
 
   return function (done) {
+    done = done || function () {};
     compiler.run(function (err, stats) {
       if (err) { throw new gutil.PluginError("webpack", err); }
 
@@ -299,30 +300,45 @@ gulp.task("clean", [
 // -----------
 // Production
 // -----------
-gulp.task("build:prod", _webpack(prodBuild));
+var _webpackWatch = function (buildFn) {
+  return function (ev) {
+    if (ev.type === "changed") {
+      buildFn();
+    }
+  };
+};
+var _webpackProd = _webpack(prodBuild);
+gulp.task("build:prod", _webpackProd);
 gulp.task("watch:prod", function () {
-  gulp.watch(FRONTEND_JS_APP_FILES, ["build:prod"]);
+  return gulp
+    .watch(FRONTEND_JS_APP_FILES)
+    .on("change", _webpackWatch(_webpackProd));
 });
 
 // -----------
 // Development
 // -----------
-gulp.task("build:dev", _webpack(devBuild));
+var _webpackDev = _webpack(devBuild);
+gulp.task("build:dev", _webpackDev);
 gulp.task("watch:dev", function () {
-  gulp.watch(FRONTEND_JS_APP_FILES, ["build:dev"]);
+  return gulp
+    .watch(FRONTEND_JS_APP_FILES)
+    .on("change", _webpackWatch(_webpackDev));
 });
 gulp.task("watch", ["watch:dev"]);
 
 // -----------
 // Test
 // -----------
-gulp.task("build:frontend:test", _webpack(testBuild));
-
+var _webpackTest = _webpack(testBuild);
+gulp.task("build:frontend:test", _webpackTest);
 gulp.task("watch:frontend:test", function () {
-  gulp.watch([].concat(
-    FRONTEND_JS_APP_FILES,
-    FRONTEND_JS_TEST_FILES
-  ), ["build:frontend:test"]);
+  return gulp
+    .watch([].concat(
+      FRONTEND_JS_APP_FILES,
+      FRONTEND_JS_TEST_FILES
+    ))
+    .on("change", _webpackWatch(_webpackTest));
 });
 
 gulp.task("build:test", ["build:frontend:test"]);
