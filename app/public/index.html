@@ -17,7 +17,7 @@
       </div>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" class="js-action btn btn-default">Convert!</button>
+          <button type="button" class="js-action btn btn-default">Convert</button>
         </span>
         <input type="text" class="js-input form-control"
                placeholder="Text to convert...">
@@ -26,6 +26,7 @@
                   data-toggle="dropdown" aria-expanded="false"
                   >to
             <span class="js-convert-label">...</span>
+            !
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -33,11 +34,12 @@
             <li><a class="js-convert" data-convert="snake" href="#">snake case</a></li>
             <li><a class="js-convert" data-convert="dash" href="#">dasherized</a></li>
             <li class="divider"></li>
-            <li><a class="js-convert" data-convert="camel,snake,dash" href="#"><b>all the things!</b></a></li>
+            <li><a class="js-convert" data-convert="camel,snake,dash" href="#"><b>all the things</b></a></li>
           </ul>
+
         </div>
       </div>
-      <div class="js-output">
+      <div class="js-output" style="margin-top: 20px">
       </div>
     </div>
     <script src="/app/js-dist/bundle.js"></script>

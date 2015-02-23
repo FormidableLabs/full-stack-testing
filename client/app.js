@@ -40,18 +40,23 @@ $(function () {
 
     // TODO[RYAN]: Switch to real UI.
     // TODO[RYAN]: Decompose better?
-    var $temp = $("<code />");
-    $output
-      .css({ "margin-top": "20px" })
-      .empty()
-      .append($("<pre />").append($temp));
+    var template = function (title, content) {
+      return $(
+        "<div class='panel panel-default'>" +
+        "  <div class='panel-heading'>" +
+        "    <h3 class='panel-title'>" + title + "</h3>" +
+        "  </div>" +
+        "  <div class='panel-body'>" + content + "</div>" +
+        "</div>"
+      );
+    };
+
+    $output.empty();
 
     // Iterate all conversion types, make AJAX request and update UI.
     $.each(convertTypes, function (i, type) {
       $.get("/api/" + type, { from: input }, function (data) {
-        var text = $temp.text();
-        text = text ? text + "\n\n" : "";
-        $temp.text(text + JSON.stringify(data, null, 2));
+        $output.append(template(type, data.to));
       });
     });
   };
