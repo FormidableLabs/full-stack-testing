@@ -27,7 +27,7 @@ var Form = module.exports = function (opts) {
   this.converter = opts.converter;
 
   // Start off with first conversion option as default.
-  this.convertTypes = null;
+  this._convertTypes = null;
   this._updateType(this.$convertTypes.first());
 
   // Bind listeners.
@@ -38,33 +38,29 @@ var Form = module.exports = function (opts) {
 Form.prototype._addListeners = function () {
   var self = this;
 
-  // Conversion types.
+  // Conversion type selection.
   this.$convertTypes.click(function (ev) {
     ev.preventDefault();
     self._updateType($(ev.currentTarget));
   });
 
-  // Actions.
+  // Convert actions.
   this.$action.click(function () {
-    self.converter.convert(self.getText(), self.getTypes());
+    self._convert();
   });
   this.$input.keydown(function (ev) {
-    if (ev.which === 13 /* Enter key */) {
-      self.converter.convert(self.getText(), self.getTypes());
-    }
+    if (ev.which !== 13 /* Enter key */) { return; }
+    self._convert();
   });
 };
 
 // Update the conversion type and label.
 Form.prototype._updateType = function ($el) {
-  this.convertTypes = $el.data("convert").split(",");
+  this._convertTypes = $el.data("convert").split(",");
   this.$convertLabel.html($el.html());
 };
 
-Form.prototype.getTypes = function () {
-  return this.convertTypes;
-};
-
-Form.prototype.getText = function () {
-  return this.$input.val();
+// Convert with current form state.
+Form.prototype._convert = function () {
+  this.converter.convert(this.$input.val(), this._convertTypes);
 };
