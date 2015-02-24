@@ -6,6 +6,11 @@ var $ = require("jquery");
 /**
  * Form wrapper.
  *
+ * Takes various DOM selectors and provides form state information:
+ *
+ * - `getTypes()`: Returns conversion types to do.
+ * - `getText()`: Returns input text to convert.
+ *
  * @param {Object} opts                 options object
  * @param {Object} opts.$input          input text field selector
  * @param {Object} opts.$convertLabel   label of current conversion type
@@ -36,4 +41,12 @@ var Form = module.exports = function (opts) {
 Form.prototype._updateType = function ($el) {
   this.convertTypes = $el.data("convert").split(",");
   this.$convertLabel.html($el.html());
+};
+
+Form.prototype.getTypes = function () {
+  return this.convertTypes;
+};
+
+Form.prototype.getText = function () {
+  return this.$input.val();
 };

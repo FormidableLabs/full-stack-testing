@@ -43,13 +43,13 @@ Converter.prototype.template = function (title, content) {
 // Retrieve data and update UI.
 Converter.prototype.convert = function () {
   var self = this;
-  var input = this.form.$input.val();
+  var input = this.form.getText();
 
   // Clear out existing data.
   this.$output.empty();
 
   // Iterate all conversion types, make AJAX request and update UI.
-  $.each(this.form.convertTypes, function (i, type) {
+  $.each(this.form.getTypes(), function (i, type) {
     $.get("/api/" + type, { from: input }, function (data) {
       self.$output.append(self.template(type, data.to));
     });
