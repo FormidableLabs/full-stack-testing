@@ -148,10 +148,6 @@ var KARMA_BASE = {
 // Karma coverage.
 var KARMA_COV = {
   reporters: ["spec", "coverage"],
-  preprocessors: {
-    // TODO[RYAN]: Switch to per-app-file coverage instead of the whole bundle.
-    "app/js-test/bundle.js": ["coverage"]
-  },
   coverageReporter: {
     reporters: [
       { type: "json", file: "coverage.json" },
