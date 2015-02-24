@@ -3,7 +3,14 @@ var converter = require("../../../server/converter");
 describe("server/converter", function () {
 
   describe("camel", function () {
-    it("should handle base cases");
+    var testFn = converter.camel;
+
+    it("should handle base cases", function () {
+      expect(testFn()).to.equal("");
+      expect(testFn(null)).to.equal("");
+      expect(testFn("")).to.equal("");
+    });
+
     it("should not convert inapplicable strings");
     it("should leave unchanged camel case");
     it("should convert snake case");
