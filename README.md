@@ -36,10 +36,12 @@ Client-side (aka "frontend") unit tests focus on one or more client application
 files in isolation. Some aspects of these tests:
 
 * Extremely fast to execute.
-* Run in a test HTML driver page, not the web application HTML.
+* Execute via a test HTML driver page, not the web application HTML.
 * Must create mock DOM and data fixtures.
 * Mock out real browser network requests / time.
 * Typically test some aspect of the UI from the user perspective.
+* Run tests in the [browser](http://127.0.0.1:3001/test/client/test.html)
+  or from command line.
 
 
 ### Server-side Unit / REST Tests
@@ -80,7 +82,6 @@ instance of the entire web application. These tests typically:
 * Take a "black box" approach to the application and interact only via the
   actual web UI.
 * Test user behaviors in an end-to-end manner.
-
 
 
 [trav]: https://travis-ci.org/

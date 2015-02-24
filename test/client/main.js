@@ -3,6 +3,7 @@
  */
 var chai = require("chai");
 var sinonChai = require("sinon-chai");
+var chaiJq = require("chai-jq");
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
@@ -12,6 +13,7 @@ window.expect = chai.expect;
 
 // Plugins
 chai.use(sinonChai);
+chai.use(chaiJq);
 
 // Mocha (part of static include).
 window.mocha.setup({

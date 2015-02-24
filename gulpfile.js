@@ -73,8 +73,7 @@ gulp.task("eslint:frontend", _eslint(FRONTEND_JS_APP_FILES, {
 
 gulp.task("eslint:frontend:test", _eslint(FRONTEND_JS_TEST_FILES, {
   envs: ["browser", "mocha"],
-  globals: ["expect", "sandbox"],
-  rules: { "max-nested-callbacks": [2, 6] }
+  globals: ["expect", "sinon"]
 }));
 
 gulp.task("eslint:backend", _eslint(BACKEND_JS_APP_FILES, {
@@ -83,14 +82,12 @@ gulp.task("eslint:backend", _eslint(BACKEND_JS_APP_FILES, {
 
 gulp.task("eslint:backend:test", _eslint(BACKEND_JS_TEST_FILES, {
   envs: ["node", "mocha"],
-  globals: ["expect", "sandbox"],
-  rules: { "max-nested-callbacks": [2, 6] }
+  globals: ["expect"]
 }));
 
 gulp.task("eslint:func:test", _eslint(FUNC_JS_TEST_FILES, {
   envs: ["node", "mocha"],
-  globals: ["expect"],
-  rules: { "max-nested-callbacks": [2, 6] }
+  globals: ["expect"]
 }));
 
 gulp.task("eslint", [
