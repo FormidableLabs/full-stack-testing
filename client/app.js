@@ -4,35 +4,19 @@
 var $ = require("jquery");
 require("bootstrap"); // Empty require to enable bootstrap JS
 
-$(function () {
-  // TODO[RYAN]: Decompose into UI / functional components / files.
+var Form = require("./form");
 
+$(function () {
   // Stash selectors.
   var $input = $(".js-input");
   var $output = $(".js-output");
-  var $convertLabel = $(".js-convert-label");
-  var $convertTypes = $(".js-convert");
 
-  // Set default conversion types.
-  var convertTypes = ["camel"];
-
-  // Update the conversion type and label.
-  var _updateType = function ($el) {
-    convertTypes = $el.data("convert").split(",");
-    $convertLabel.html($el.html());
-  };
-
-  // Start off with first conversion option as default.
-  _updateType($convertTypes.first());
-
-  // Listen and update conversion type on clicks.
-  $convertTypes.click(function (ev) {
-    ev.preventDefault();
-    _updateType($(ev.currentTarget));
+  // Bind form and initialize UI state.
+  var form = new Form({
+    $input: $input,
+    $convertLabel: $(".js-convert-label"),
+    $convertTypes: $(".js-convert")
   });
-
-  // Create HTML with results.
-  // TODO: See http://getbootstrap.com/components/#panels-heading
 
   // Perform the actual conversion request and UI update.
   var _convertText = function () {
@@ -54,7 +38,7 @@ $(function () {
     $output.empty();
 
     // Iterate all conversion types, make AJAX request and update UI.
-    $.each(convertTypes, function (i, type) {
+    $.each(form.convertTypes, function (i, type) {
       $.get("/api/" + type, { from: input }, function (data) {
         $output.append(template(type, data.to));
       });
@@ -63,7 +47,7 @@ $(function () {
 
   // Listen and submit action.
   $(".js-action").click(_convertText);
-  $input.keydown(function (ev) {
+  $(".js-input").keydown(function (ev) {
     if (ev.which === 13 /* Enter key */) {
       _convertText();
     }
