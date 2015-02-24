@@ -21,6 +21,7 @@ var webpack = require("webpack");
 var prodBuild = require("./webpack.config");
 var devBuild = require("./webpack.config.dev");
 var testBuild = require("./webpack.config.test");
+var covBuild = require("./webpack.config.coverage");
 
 // Log colors
 var cyan = gutil.colors.cyan;
@@ -30,7 +31,7 @@ var cyan = gutil.colors.cyan;
 // ----------------------------------------------------------------------------
 var FRONTEND_JS_APP_FILES = [
   "client/**/*.js",
-  "test/client/setup.js"
+  "test/client/main.js"
 ];
 
 var FRONTEND_JS_TEST_FILES = [
@@ -147,11 +148,14 @@ var KARMA_BASE = {
 
 // Karma coverage.
 var KARMA_COV = {
-  reporters: ["mocha", "coverage"],
-  preprocessors: {
-    // TODO[RYAN]: Switch to per-app-file coverage instead of the whole bundle.
-    "app/js-test/bundle.js": ["coverage"]
-  },
+  reporters: ["spec", "coverage"],
+  files: [
+    // Test libraries.
+    "node_modules/sinon/pkg/sinon.js",
+
+    // Rest is bundled.
+    "app/js-test/bundle-coverage.js"
+  ],
   coverageReporter: {
     reporters: [
       { type: "json", file: "coverage.json" },
@@ -342,7 +346,18 @@ gulp.task("watch:frontend:test", function () {
     .on("change", _webpackWatch(_webpackTest));
 });
 
-gulp.task("build:test", ["build:frontend:test"]);
+var _webpackCov = _webpack(covBuild);
+gulp.task("build:frontend:coverage", _webpackCov);
+gulp.task("watch:frontend:coverage", function () {
+  return gulp
+    .watch([].concat(
+      FRONTEND_JS_APP_FILES,
+      FRONTEND_JS_TEST_FILES
+    ))
+    .on("change", _webpackWatch(_webpackCov));
+});
+
+gulp.task("build:test", ["build:frontend:test", "build:frontend:coverage"]);
 
 // ----------------------------------------------------------------------------
 // Servers
@@ -376,9 +391,9 @@ gulp.task("server:sources", function () {
 // ----------------------------------------------------------------------------
 gulp.task("dev", sequence(
   "clean",
-  ["build:dev", "build:frontend:test"],
-  ["watch:dev", "watch:frontend:test",
-   "server", "server:sources"]
+  ["build:dev", "build:frontend:test", "build:frontend:coverage"],
+  ["watch:dev", "watch:frontend:test", "watch:frontend:coverage"],
+  ["server", "server:sources"]
 ));
 gulp.task("prod", sequence("build:prod", ["watch:prod", "server", "server:sources"]));
 gulp.task("build", sequence("clean:dist", "build:prod"));
