@@ -237,7 +237,7 @@ gulp.task("test:all", ["test:backend", "test:frontend:all"]);
 // Quality
 // ----------------------------------------------------------------------------
 gulp.task("check:base", ["jscs", "eslint"]);
-gulp.task("check", ["check:base"]); // TODO[RYAN], "test"]);
+gulp.task("check", ["check:base", "test"]);
 gulp.task("check:ci", ["check:base", "test:ci"]);
 gulp.task("check:all", ["check:base", "test:all"]);
 
