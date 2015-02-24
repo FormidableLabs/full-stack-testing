@@ -14,16 +14,6 @@ module.exports = _.extend({}, _.omit(prodCfg, "plugins"), {
     filename: "bundle.js"
   },
   devtool: "#source-map",
-  module: {
-    postLoaders: [
-      // Manually instrument client code for code coverage.
-      {
-        test: /client\/.*\.js$/,
-        exclude: /(test|node_modules)\//,
-        loader: "istanbul-instrumenter"
-      }
-    ]
-  },
   resolve: _.merge({}, prodCfg.resolve, {
     alias: {
       client: path.join(__dirname, "client")
