@@ -1,7 +1,23 @@
+/**
+ * Converter tests.
+ *
+ * These tests take the `client/converter.js` class and test that calls to
+ * `Converter.convert(TEXT, TYPES)` will:
+ *
+ * - Call the backend REST API (which we fake respond to with Sinon.JS).
+ * - Update the UI output DOM element with results.
+ *
+ * These tests do _not_ test things like:
+ *
+ * - Attach DOM fixtures to the actual test page (ours are disconnected).
+ * - Actual DOM listeners / bindings / inputs going _to_ the Converter.
+ * - Actual REST responses (we have a canned response for everything).
+ */
 var $ = require("jquery");
 var Converter = require("client/converter");
 
 // Fixtures, variables.
+// We take care to _declare_ these here, but only _initialize_ in setup.
 var server;
 var $fixture;
 var converter;
