@@ -37,12 +37,14 @@ var FRONTEND_JS_TEST_FILES = [
   "test/client/**/*.spec.js"
 ];
 
-var BACKEND_JS_APP_FILES = [
-  "server/**/*.js",
-  // Include test setup, task runner files too.
+var BACKEND_JS_INFRA_FILES = [
   "test/server/setup.js",
   "test/func/setup.js",
   "*.js"
+];
+
+var BACKEND_JS_APP_FILES = [
+  "server/**/*.js"
 ];
 
 var BACKEND_JS_TEST_FILES = [
@@ -76,7 +78,8 @@ gulp.task("eslint:frontend:test", _eslint(FRONTEND_JS_TEST_FILES, {
   globals: ["expect", "sinon"]
 }));
 
-gulp.task("eslint:backend", _eslint(BACKEND_JS_APP_FILES, {
+gulp.task("eslint:backend", _eslint(
+  [].concat(BACKEND_JS_INFRA_FILES, BACKEND_JS_APP_FILES), {
   envs: ["node"]
 }));
 
@@ -104,6 +107,7 @@ gulp.task("jscs", function () {
     .src([].concat(
       FRONTEND_JS_APP_FILES,
       FRONTEND_JS_TEST_FILES,
+      BACKEND_JS_INFRA_FILES,
       BACKEND_JS_APP_FILES,
       BACKEND_JS_TEST_FILES
     ))
