@@ -24,11 +24,18 @@ window.mocha.setup({
 // --------------------------------------------------------------------------
 // Bootstrap
 // --------------------------------------------------------------------------
+// Use webpack to include all app code _except_ the entry point so we can get
+// code coverage in the bundle, whether tested or not.
+var appReq = require.context("client", true, /\.js$/);
+appReq.keys().filter(function (key) {
+  return key !== "./app.js";
+}).map(appReq);
+
 // Use webpack to infer and `require` tests automatically.
 var testsReq = require.context(".", true, /\.spec.js$/);
 testsReq.keys().map(testsReq);
 
 // Only start mocha in browser.
 if (!window.__karma__) {
-  mocha.run();
+  window.mocha.run();
 }
