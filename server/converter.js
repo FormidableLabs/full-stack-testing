@@ -12,7 +12,7 @@
  * Camel case a string.
  *
  *     myString -> myString
- *     mySTring -> mySTring
+ *     mySTring -> myString
  *     my_string -> myString
  *     my-string -> myString
  *
@@ -22,9 +22,32 @@
 function camel(val) {
   return (val || "")
     .replace(/^\s+|\s+$/g, "")
+    .replace(/([A-Z])([A-Z]+)/g, function (m, first, second) {
+      return first + second.toLowerCase();
+    })
     .replace(/[-_ ]+(.)/g, function (m, first) {
       return first.toUpperCase();
     });
+}
+
+/**
+ * Parse string into delimeter version.
+ *
+ * Works for snake and dashed cases.
+ *
+ * @param   {String} val    string to convert
+ * @param   {String} delim  delimiter to case string with
+ * @returns {String}        cased string
+ * @api private
+ */
+function _convert(val, delim) {
+  return (val || "")
+    .replace(/^\s+|\s+$/g, "")
+    .replace(/([a-z])([A-Z])/g, function (m, first, second) {
+      return first + delim + second;
+    })
+    .split(/[-_ ]+/).join(delim)
+    .toLowerCase();
 }
 
 /**
@@ -39,13 +62,7 @@ function camel(val) {
  * @returns {String}      snake-cased string
  */
 function snake(val) {
-  return (val || "")
-    .replace(/^\s+|\s+$/g, "")
-    .replace(/([a-z])([A-Z])/, function (m, first, second) {
-      return first + "-" + second;
-    })
-    .split(/[-_ ]+/).join("-")
-    .toLowerCase();
+  return _convert(val, "_");
 }
 
 /**
@@ -59,7 +76,7 @@ function snake(val) {
  * @returns {String}      dasherized string
  */
 function dash(val) {
-  return "TODO: dash " + val;
+  return _convert(val, "-");
 }
 
 module.exports = {
