@@ -1,10 +1,5 @@
 /**
- * UI: Action
- */
-var $ = require("jquery");
-
-/**
- * Action / input wrapper.
+ * UI: Action / input wrapper.
  *
  * Takes input and calls conversions.
  *
