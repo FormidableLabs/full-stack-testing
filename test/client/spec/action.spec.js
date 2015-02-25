@@ -5,10 +5,9 @@
  * To isolate the test, we fake `converter` and `types` objects. We spy/stub
  * (fake) out and verify only the **public** methods on both the objects:
  *
- * - `Converter.prototype.convert(VAL, TYPES)`: Replace with `sinon.spy()` do
- *   do _nothing_ on call.
- * - `Types.prototype.getTypes()`: Replace with `sinon.stub()` that returns an
- *   empty array on call.
+ * - `Converter.prototype.convert(VAL, TYPES)`
+ * - `Types.prototype.getTypes()`
+ *
  */
 var $ = require("jquery");
 var Action = require("client/action");
