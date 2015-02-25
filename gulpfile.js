@@ -249,24 +249,32 @@ gulp.task("check:all", ["check:base", "test:all"]);
 // ----------------------------------------------------------------------------
 // Builders
 // ----------------------------------------------------------------------------
+var _webpackUpdate = function (err, stats) {
+  if (err) { throw new gutil.PluginError("webpack", err); }
+
+  gutil.log(cyan("[webpack]"), stats.toString({
+    hash: true,
+    colors: true,
+    cached: false
+  }));
+};
+
 // Create webpack task.
 var _webpack = function (cfg) {
   // Single compiler for caching.
   var compiler = webpack(cfg);
 
-  return function (done) {
-    done = done || function () {};
-    compiler.run(function (err, stats) {
-      if (err) { throw new gutil.PluginError("webpack", err); }
-
-      gutil.log(cyan("[webpack]"), stats.toString({
-        hash: true,
-        colors: true,
-        cached: false
-      }));
-
-      done();
-    });
+  return {
+    run: function (done) {
+      done = done || function () {};
+      compiler.run(function (err, stats) {
+        _webpackUpdate(err, stats);
+        done();
+      });
+    },
+    watch: function () {
+      compiler.watch(200, _webpackUpdate);
+    }
   };
 };
 
@@ -305,57 +313,28 @@ gulp.task("clean", [
 // -----------
 // Production
 // -----------
-var _webpackWatch = function (buildFn) {
-  return function (ev) {
-    if (ev.type === "changed") {
-      buildFn();
-    }
-  };
-};
 var _webpackProd = _webpack(prodBuild);
-gulp.task("build:prod", _webpackProd);
-gulp.task("watch:prod", function () {
-  return gulp
-    .watch(FRONTEND_JS_APP_FILES)
-    .on("change", _webpackWatch(_webpackProd));
-});
+gulp.task("build:prod", _webpackProd.run);
+gulp.task("watch:prod", _webpackProd.watch);
 
 // -----------
 // Development
 // -----------
 var _webpackDev = _webpack(devBuild);
-gulp.task("build:dev", _webpackDev);
-gulp.task("watch:dev", function () {
-  return gulp
-    .watch(FRONTEND_JS_APP_FILES)
-    .on("change", _webpackWatch(_webpackDev));
-});
+gulp.task("build:dev", _webpackDev.run);
+gulp.task("watch:dev", _webpackDev.watch);
 gulp.task("watch", ["watch:dev"]);
 
 // -----------
 // Test
 // -----------
 var _webpackTest = _webpack(testBuild);
-gulp.task("build:frontend:test", _webpackTest);
-gulp.task("watch:frontend:test", function () {
-  return gulp
-    .watch([].concat(
-      FRONTEND_JS_APP_FILES,
-      FRONTEND_JS_TEST_FILES
-    ))
-    .on("change", _webpackWatch(_webpackTest));
-});
+gulp.task("build:frontend:test", _webpackTest.run);
+gulp.task("watch:frontend:test", _webpackTest.watch);
 
 var _webpackCov = _webpack(covBuild);
-gulp.task("build:frontend:coverage", _webpackCov);
-gulp.task("watch:frontend:coverage", function () {
-  return gulp
-    .watch([].concat(
-      FRONTEND_JS_APP_FILES,
-      FRONTEND_JS_TEST_FILES
-    ))
-    .on("change", _webpackWatch(_webpackCov));
-});
+gulp.task("build:frontend:coverage", _webpackCov.run);
+gulp.task("watch:frontend:coverage", _webpackCov.watch);
 
 gulp.task("build:test", ["build:frontend:test", "build:frontend:coverage"]);
 
@@ -391,10 +370,9 @@ gulp.task("server:sources", function () {
 // ----------------------------------------------------------------------------
 gulp.task("dev", sequence(
   "clean",
-  ["build:dev", "build:frontend:test", "build:frontend:coverage"],
   ["watch:dev", "watch:frontend:test", "watch:frontend:coverage"],
   ["server", "server:sources"]
 ));
-gulp.task("prod", sequence("build:prod", ["watch:prod", "server", "server:sources"]));
+gulp.task("prod", sequence(["watch:prod", "server", "server:sources"]));
 gulp.task("build", sequence("clean:dist", "build:prod"));
 gulp.task("default", sequence("clean", ["build:dev", "build:test"], "check"));
