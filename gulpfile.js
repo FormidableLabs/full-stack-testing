@@ -273,7 +273,7 @@ var _webpack = function (cfg) {
       });
     },
     watch: function () {
-      compiler.watch(200, _webpackUpdate);
+      compiler.watch(100, _webpackUpdate);
     }
   };
 };
@@ -351,7 +351,6 @@ gulp.task("server", function () {
     },
     watch: [
       "server",
-      "client",
       "app/build"
     ]
   });
