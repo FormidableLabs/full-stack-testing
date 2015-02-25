@@ -12,11 +12,13 @@
 var $ = require("jquery");
 var Action = require("client/action");
 
-// Have to manually create a keydown event.
+// Have to manually create keydown events.
 // See: http://stackoverflow.com/a/832121/741892
 /*eslint-disable new-cap*/
 var KEYDOWN_ENTER_EVENT = $.Event("keydown");
 KEYDOWN_ENTER_EVENT.which = 13; // Enter Key
+var LETTER_A_EVENT = $.Event("keydown");
+LETTER_A_EVENT.which = "A".charCodeAt(0); // Letter "A" Key
 /*eslint-enable new-capw*/
 
 // Fixtures, variables.
@@ -48,6 +50,15 @@ describe("client/action", function () {
   });
 
   it("does not call converter / types methods before actions", function () {
+    expect(action.types.getTypes).to.not.be.called;
+    expect(action.converter.convert).to.not.be.called;
+  });
+
+  it("does not call methods on typing without return / click", function () {
+    // We're really checking that typing something _besides_ a return won't
+    // trigger an action.
+    action.$input.trigger(LETTER_A_EVENT);
+
     expect(action.types.getTypes).to.not.be.called;
     expect(action.converter.convert).to.not.be.called;
   });
