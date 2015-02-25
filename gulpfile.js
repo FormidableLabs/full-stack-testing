@@ -130,12 +130,12 @@ process.env.PHANTOMJS_BIN = "./node_modules/.bin/phantomjs";
 // Karma base options
 var KARMA_BASE = {
   frameworks: ["mocha"],
-  reporters: ["mocha"],
+  reporters: ["spec"],
   files: [
-    // Test libraries.
+    // Sinon has issues with webpack. Do global include.
     "node_modules/sinon/pkg/sinon.js",
 
-    // Rest is bundled.
+    // Test bundle.
     "app/js-test/bundle.js"
   ],
   port: 9999,
@@ -150,10 +150,7 @@ var KARMA_BASE = {
 var KARMA_COV = {
   reporters: ["spec", "coverage"],
   files: [
-    // Test libraries.
     "node_modules/sinon/pkg/sinon.js",
-
-    // Rest is bundled.
     "app/js-test/bundle-coverage.js"
   ],
   coverageReporter: {
@@ -191,11 +188,9 @@ var _karmaAll = _karma(KARMA_BASE, {
 });
 
 gulp.task("karma:fast", _karmaFast);
-
 gulp.task("karma:ci", _karma(KARMA_BASE, {
   browsers: ["PhantomJS", "Firefox"]
 }));
-
 gulp.task("karma:all", _karmaAll);
 
 gulp.task("test:frontend", ["clean:coverage:client"], _karmaFast);
