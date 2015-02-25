@@ -4,22 +4,26 @@
 var $ = require("jquery");
 require("bootstrap"); // Empty require to enable bootstrap JS
 
-var Form = require("./form");
 var Converter = require("./converter");
+var Types = require("./types");
+var Action = require("./action");
 
 // Our JS bundle loads after DOM, so don't need jQuery ready wait...
-// Bind converter and initialize.
+// Bind converter / types and initialize.
 var converter = new Converter({
   $output: $(".js-output")
 });
+var types = new Types({
+  $label: $(".js-convert-label"),
+  $types: $(".js-convert-types")
+});
 
 /*eslint-disable no-new*/
-// Bind form and initialize UI state.
-new Form({
-  $action: $(".js-action"),
+// Bind action and initialize UI state.
+new Action({
+  $submit: $(".js-submit"),
   $input: $(".js-input"),
-  $convertLabel: $(".js-convert-label"),
-  $convertTypes: $(".js-convert"),
-  converter: converter
+  converter: converter,
+  types: types
 });
 /*eslint-enable no-new*/
