@@ -39,6 +39,7 @@ var FRONTEND_JS_TEST_FILES = [
 ];
 
 var BACKEND_JS_INFRA_FILES = [
+  "app/heroku/**/*.js",
   "test/server/setup.js",
   "test/func/setup.js",
   "*.js"
