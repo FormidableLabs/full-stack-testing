@@ -16,9 +16,10 @@ app.use("/app/js-test", express.static("app/js-test"));
 app.use("/test/client", express.static("test/client"));
 
 // Serve docs as root.
-// TODO: ADD DOCS w/ JADE.
+app.set("view engine", "jade");
+app.set("views", "app/doc");
 app.get("/", function (req, res) {
-  res.send("TODO: DOCS");
+  res.render("index");
 });
 
 // Start server.
