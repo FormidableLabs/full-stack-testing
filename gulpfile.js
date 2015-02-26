@@ -188,7 +188,7 @@ var _karmaAll = _karma(KARMA_BASE, {
 });
 
 gulp.task("karma:fast", _karmaFast);
-gulp.task("karma:ci", _karma(KARMA_BASE, {
+gulp.task("karma:ci", _karma(KARMA_BASE, KARMA_COV, {
   browsers: ["PhantomJS", "Firefox"]
 }));
 gulp.task("karma:all", _karmaAll);
