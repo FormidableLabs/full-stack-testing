@@ -46,8 +46,9 @@
   "scripts": {
     "test": "gulp build check",
     "build": "webpack --config webpack.config.js",
+    "build-test": "webpack --config webpack.config.test.js",
     "start": "node server/index.js",
-    "postinstall": "echo $DYNO"
+    "postinstall": " [ -z \"$DYNO\" ] || (npm run-script build && npm run-script build-test)"
   },
   "repository": {
     "type": "git",
