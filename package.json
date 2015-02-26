@@ -51,7 +51,7 @@
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
     "start": "node server/index.js",
-    "postinstall": "[ -z \"$DYNO\" ] || (npm run-script build-all && node app/heroku/install.js)"
+    "postinstall": "node app/heroku/not-heroku.js || (npm run-script build-all && node app/heroku/install.js)"
   },
   "repository": {
     "type": "git",
