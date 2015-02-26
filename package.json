@@ -45,7 +45,8 @@
   },
   "scripts": {
     "test": "gulp build check",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
