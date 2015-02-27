@@ -1,0 +1,24 @@
+doctype
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    title Full. Stack. Testing.
+    link(rel="stylesheet", href="/node_modules/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css")
+    script(src="/node_modules/jquery/dist/jquery.min.js")
+  body
+    .container
+      .jumbotron
+        h1.js-page-title Full. Stack. Testing.
+        p.js-page-subtitle with JavaScript!
+
+      block content
+
+    script.
+      // TODO[RYAN]: Abstract to JS file.
+
+      // Remove the README header.
+      $("h2#full-stack-testing-").remove();

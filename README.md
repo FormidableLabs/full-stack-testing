@@ -1,5 +1,5 @@
 Full. Stack. Testing.
-=====================
+---------------------
 
 A full-stack sample JavaScript web application with simple reference tests
 for learning frontend, backend and functional testing.
@@ -27,9 +27,9 @@ test/server
 test/func
 ```
 
-## Test Types
+### Test Types
 
-### Client-side Unit Tests
+#### Client-side Unit Tests
 
 `test/client`
 
@@ -45,13 +45,13 @@ files in isolation. Some aspects of these tests:
   or from command line.
 
 
-### Server-side Unit / REST Tests
+#### Server-side Unit / REST Tests
 
 `test/server`
 
 Server-side (aka "backend") tests have two real flavors..
 
-#### Server-side Unit Tests
+##### Server-side Unit Tests
 
 `test/server/spec`
 
@@ -60,7 +60,7 @@ Pure JavaScript tests that import the server code and test it in isolation.
 * Extremely fast to execute.
 * Typically test pure code logic in isolation.
 
-#### Server-side REST Tests
+##### Server-side REST Tests
 
 `test/server/rest`
 
@@ -72,7 +72,7 @@ client to make real network requests to the server and validate responses.
 * Cover more of an "end-to-end" perspective on validation.
 
 
-### Functional Tests
+#### Functional Tests
 
 `test/func`
 

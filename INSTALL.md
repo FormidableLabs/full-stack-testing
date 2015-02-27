@@ -1,7 +1,7 @@
 Installation
-============
+------------
 
-## Browser Compatibility.
+### Browser Compatibility.
 
 The application and test samples should work for modern versions of Chrome,
 Safari, and Firefox and Internet Explorer 9+. Earlier versions of IE could
