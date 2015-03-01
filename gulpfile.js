@@ -1,6 +1,7 @@
 /**
  * Gulpfile
  */
+var path = require("path");
 var _ = require("lodash");
 
 // Gulp
@@ -12,7 +13,7 @@ var gutil = require("gulp-util");
 var jsxcs = require("gulp-jsxcs");
 var nodemon = require("gulp-nodemon");
 var rimraf = require("gulp-rimraf");
-var karma = require("gulp-karma");
+var karma = require("karma").server;
 var mocha = require("gulp-mocha");
 var istanbul = require("gulp-istanbul");
 
@@ -129,25 +130,6 @@ process.env.PHANTOMJS_BIN = "./node_modules/.bin/phantomjs";
 // var SAUCE_BRANCH = process.env.TRAVIS_BRANCH || "local";
 // var SAUCE_TAG = process.env.SAUCE_USERNAME + "@" + SAUCE_BRANCH;
 
-// Karma base options
-var KARMA_BASE = {
-  frameworks: ["mocha"],
-  reporters: ["spec"],
-  files: [
-    // Sinon has issues with webpack. Do global include.
-    "node_modules/sinon/pkg/sinon.js",
-
-    // Test bundle.
-    "app/js-test/bundle.js"
-  ],
-  port: 9999,
-  client: {
-    mocha: {
-      ui: "bdd"
-    }
-  }
-};
-
 // Karma coverage.
 var KARMA_COV = {
   reporters: ["spec", "coverage"],
@@ -167,30 +149,25 @@ var KARMA_COV = {
 
 // Task helper.
 var _karma = function () {
-  var cfg = _.extend.apply(_, [{}].concat(_.toArray(arguments)));
+  var cfg = _.extend.apply(_, [{
+    configFile: path.join(__dirname, "test/client/karma.conf.js")
+  }].concat(_.toArray(arguments)));
 
-  return function () {
-    gulp
-      .src(cfg.files)
-      .pipe(karma(cfg))
-      .on("error", function (err) {
-        throw new gutil.PluginError("karma", err);
-      });
+  return function (done) {
+    karma.start(cfg, done);
   };
 };
 
 // Instances.
 // Fast: Phantom-only, w/ coverage
-var _karmaFast = _karma(KARMA_BASE, KARMA_COV, {
-  browsers: ["PhantomJS"]
-});
+var _karmaFast = _karma(KARMA_COV);
 // All: No coverage, all Mac browsers
-var _karmaAll = _karma(KARMA_BASE, {
+var _karmaAll = _karma({
   browsers: ["PhantomJS", "Chrome", "Firefox", "Safari"]
 });
 
 gulp.task("karma:fast", _karmaFast);
-gulp.task("karma:ci", _karma(KARMA_BASE, KARMA_COV, {
+gulp.task("karma:ci", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Firefox"]
 }));
 gulp.task("karma:all", _karmaAll);

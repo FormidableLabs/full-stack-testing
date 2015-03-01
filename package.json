@@ -25,7 +25,6 @@
     "gulp-eslint": "0.2.2",
     "gulp-istanbul": "0.6.0",
     "gulp-jsxcs": "0.1.7",
-    "gulp-karma": "0.0.4",
     "gulp-mocha": "2.0.0",
     "gulp-nodemon": "1.0.5",
     "gulp-rimraf": "0.1.1",
@@ -47,8 +46,10 @@
     "supertest": "0.15.0"
   },
   "scripts": {
-    "test": "gulp build && gulp check",
+    "test-frontend": "node_modules/karma/bin/karma start test/client/karma.conf.js",
     "test-backend": "mocha --require test/server/setup.js test/server/spec",
+    "test": "npm run-script test-frontend && npm run-script test-backend",
+    "check": "npm run-script build-all && npm run-script test && gulp check",
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
     "build-all": "npm run-script build && npm run-script build-test",
