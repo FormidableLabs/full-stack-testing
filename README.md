@@ -1,5 +1,5 @@
 Full. Stack. Testing.
-=====================
+---------------------
 
 A full-stack sample JavaScript web application with simple reference tests
 for learning frontend, backend and functional testing.
@@ -9,17 +9,31 @@ for learning frontend, backend and functional testing.
 
 ## Introduction
 
-This repository includes a simple web application that has a client built with:
+We start with a simple "Converter" [web application][fst_app] that converts
+strings to [camel][], [snake][], or dashed cases. You can see an online
+demo of the app/tests (with local development counterparts) at:
+[full-stack-testing.formidablelabs.com][fst_site]
 
-* **[jQuery](http://jquery.com/)**: Robust client DOM / AJAX library
-* **[Webpack](http://webpack.github.io/)**: Organization and bundling tool
+* **[Converter Web App][fst_app]** ([127.0.0.1:3000][dev_app])
+* **[Client Unit Tests][fst_test]**
+  ([127.0.0.1:3001/test/client/test.html][dev_test])
 
-and a server built with:
+### Stack
 
-* **[Express](http://expressjs.com/)**: Lightweight server framework
+The frontend app uses [jQuery][] for DOM/AJAX work and is built with the
+wonderful [Webpack][] bundling tool. The backend server uses the ever popular
+[Express][] framework for our REST API.
 
-To test our (extremely small) web application, we have three different types
-of test setups, discussed [below](#test-types):
+To test our application, we write **client**, **backend**, and **functional**
+tests using the following libraries:
+
+* **[Mocha](http://mochajs.org/)**: Suites, tests
+* **[Chai](http://chaijs.com/)**: Assertions
+* **[Sinon.JS](http://sinonjs.org/)**: Fakes
+
+### Test Types
+
+The test suites in this project can be found in the following locations:
 
 ```
 test/client
@@ -27,11 +41,11 @@ test/server
 test/func
 ```
 
-## Test Types
+For each of these
 
-### Client-side Unit Tests
+#### Client-side Unit Tests
 
-`test/client`
+`test/client/spec`
 
 Client-side (aka "frontend") unit tests focus on one or more client application
 files in isolation. Some aspects of these tests:
@@ -41,17 +55,16 @@ files in isolation. Some aspects of these tests:
 * Must create mock DOM and data fixtures.
 * Mock out real browser network requests / time.
 * Typically test some aspect of the UI from the user perspective.
-* Run tests in the [browser](http://127.0.0.1:3001/test/client/test.html)
-  or from command line.
+* Run tests in the [browser][fst_test] or from command line.
 
 
-### Server-side Unit / REST Tests
+#### Server-side Unit / REST Tests
 
 `test/server`
 
 Server-side (aka "backend") tests have two real flavors..
 
-#### Server-side Unit Tests
+##### Server-side Unit Tests
 
 `test/server/spec`
 
@@ -60,7 +73,7 @@ Pure JavaScript tests that import the server code and test it in isolation.
 * Extremely fast to execute.
 * Typically test pure code logic in isolation.
 
-#### Server-side REST Tests
+##### Server-side REST Tests
 
 `test/server/rest`
 
@@ -72,7 +85,7 @@ client to make real network requests to the server and validate responses.
 * Cover more of an "end-to-end" perspective on validation.
 
 
-### Functional Tests
+#### Functional Tests
 
 `test/func`
 
@@ -84,6 +97,27 @@ instance of the entire web application. These tests typically:
   actual web UI.
 * Test user behaviors in an end-to-end manner.
 
+### Notes
+
+#### Browser Compatibility.
+
+The application and test samples should work for modern versions of Chrome,
+Safari, and Firefox and Internet Explorer 9+. Earlier versions of IE could
+be readily supported with a few underlying library changes, but for simplicity,
+we've kept with a modern stack in this repository.
+
+
+[jQuery]: http://jquery.com/
+[Webpack]: http://webpack.github.io/
+[Express]: http://expressjs.com/
+[camel]: http://en.wikipedia.org/wiki/CamelCase
+[snake]: http://en.wikipedia.org/wiki/Snake_case
+
+[fst_site]: http://full-stack-testing.formidablelabs.com/
+[fst_test]: http://full-stack-testing.formidablelabs.com/test/client/test.html
+[fst_app]: http://full-stack-testing.formidablelabs.com/app/
+[dev_app]: http://127.0.0.1:3000/
+[dev_test]: http://127.0.0.1:3001/test/client/test.html
 
 [trav]: https://travis-ci.org/
 [trav_img]: https://api.travis-ci.org/FormidableLabs/full-stack-testing.svg
