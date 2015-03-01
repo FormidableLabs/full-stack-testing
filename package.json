@@ -48,10 +48,10 @@
   },
   "scripts": {
     "test": "gulp build && gulp check",
-    "build-all": "npm run-script build && npm run-script build-test",
+    "test-backend": "mocha --require test/server/setup.js test/server/spec",
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
-    "start": "node server/index.js",
+    "build-all": "npm run-script build && npm run-script build-test",
     "postinstall": "node app/heroku/not-heroku.js || (npm run-script build-all && node app/heroku/install.js)"
   },
   "repository": {
