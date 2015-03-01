@@ -28,7 +28,7 @@ html(lang="en")
 
     .container-fluid
       block nav
-        .nav-wrapper(style="display: none;")
+        .nav-wrapper
           nav#nav.navmenu.navmenu-inverse.navmenu-fixed-left.offcanvas(role="navigation")
             a#home.navmenu-brand(href="#") Home
             ul.nav.navmenu-nav
@@ -42,40 +42,7 @@ html(lang="en")
 
       block content
 
-    //- Fixtures (for adding into DOM).
-    #fixtures.hidden(style="display: none;")
-      li.nav-item
-        a
-
     script(src="/node_modules/jquery/dist/jquery.min.js")
     script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")
     script(src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js")
-    script.
-      // TODO[RYAN]: Abstract to JS file.
-      (function () {
-        // Remove the README header.
-        $("h2#full-stack-testing-").remove();
-
-        // Populate offcanvas menu if Jasny detected.
-        var $nav = $("#nav");
-        if ($nav.offcanvas) {
-          var $navContent = $(".navmenu-nav");
-          var $navFixture = $("#fixtures .nav-item");
-          $("h2,h3").each(function () {
-            // Add headings to nav.
-            var $heading = $(this);
-            $navFixture
-              .clone().appendTo($navContent)
-              .addClass("nav-item-" + $heading.prop("tagName"))
-              .find("> a")
-                .attr("href", "#" + $heading.prop("id"))
-                .text($heading.text());
-          });
-          $("#nav, #home, li.nav-item > a").click(function () {
-            // Close menu on any click.
-            $nav.offcanvas("hide");
-          });
-          $(".nav-wrapper").show();
-        }
-      })();
-
+    script(src="/public/site.js")

@@ -31,6 +31,7 @@ var cyan = gutil.colors.cyan;
 // ----------------------------------------------------------------------------
 var FRONTEND_JS_APP_FILES = [
   "client/**/*.js",
+  "app/doc/public/*.js",
   "test/client/main.js"
 ];
 
