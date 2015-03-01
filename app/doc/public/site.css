@@ -59,6 +59,10 @@
 .navmenu-inverse .navmenu-nav > li > a {
   color: #ccc;
 }
+.navmenu-fixed-left,
+.navbar-offcanvas.navmenu-fixed-left {
+  border-right: 1px solid #888;
+}
 
 .nav-item-H2 {
   font-weight: bold;
