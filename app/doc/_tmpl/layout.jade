@@ -8,8 +8,8 @@ html(lang="en")
     title Full. Stack. Testing.
     link(rel="stylesheet", href="/node_modules/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet", href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css")
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css")
     link(rel="stylesheet", href="/public/site.css")
-    script(src="/node_modules/jquery/dist/jquery.min.js")
   body
     //- Banner
     //- * forkme_right_gray_6d6d6d
@@ -22,15 +22,60 @@ html(lang="en")
         src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
         alt="Fork me on GitHub")
 
-    .container
-      .jumbotron.backing-gradient.text-center
-        h1.js-page-title Full. Stack. Testing.
-        p.js-page-subtitle with JavaScript!
+    .jumbotron.backing-gradient.text-center
+      h1.js-page-title Full. Stack. Testing.
+      p.js-page-subtitle with JavaScript!
+
+    .container-fluid
+      block nav
+        .nav-wrapper(style="display: none;")
+          nav#nav.navmenu.navmenu-inverse.navmenu-fixed-left.offcanvas(role="navigation")
+            a#home.navmenu-brand(href="#") Home
+            ul.nav.navmenu-nav
+
+          div.navbar.navbar-default.navbar-fixed-top
+            button.navbar-toggle(type="button"
+                                 data-toggle="offcanvas" data-target="#nav" data-canvas="body")
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
 
       block content
 
+    //- Fixtures (for adding into DOM).
+    #fixtures.hidden(style="display: none;")
+      li.nav-item
+        a
+
+    script(src="/node_modules/jquery/dist/jquery.min.js")
+    script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js")
     script.
       // TODO[RYAN]: Abstract to JS file.
+      (function () {
+        // Remove the README header.
+        $("h2#full-stack-testing-").remove();
 
-      // Remove the README header.
-      $("h2#full-stack-testing-").remove();
+        // Populate offcanvas menu if Jasny detected.
+        var $nav = $("#nav");
+        if ($nav.offcanvas) {
+          var $navContent = $(".navmenu-nav");
+          var $navFixture = $("#fixtures .nav-item");
+          $("h2,h3").each(function () {
+            // Add headings to nav.
+            var $heading = $(this);
+            $navFixture
+              .clone().appendTo($navContent)
+              .addClass("nav-item-" + $heading.prop("tagName"))
+              .find("> a")
+                .attr("href", "#" + $heading.prop("id"))
+                .text($heading.text());
+          });
+          $("#nav, #home, li.nav-item > a").click(function () {
+            // Close menu on any click.
+            $nav.offcanvas("hide");
+          });
+          $(".nav-wrapper").show();
+        }
+      })();
+

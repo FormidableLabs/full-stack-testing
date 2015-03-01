@@ -31,7 +31,7 @@ tests with technologies that include:
 * **[Chai](http://chaijs.com/)**: Assertions
 * **[Sinon.JS](http://sinonjs.org/)**: Fakes
 
-### Test Types
+## Tests
 
 The test suites in this project can be found in the following locations:
 
@@ -43,7 +43,7 @@ test/func
 
 For each of these
 
-#### Frontend Tests
+### Frontend Tests
 
 `test/client/spec`
 
@@ -58,13 +58,13 @@ files in isolation. Some aspects of these tests:
 * Run tests in the [browser][fst_test] or from command line.
 
 
-#### Backend Tests
+### Backend Tests
 
 `test/server`
 
 Server-side (aka "backend") tests have two real flavors..
 
-##### Server-side Unit Tests
+#### Server-side Unit Tests
 
 `test/server/spec`
 
@@ -73,7 +73,7 @@ Pure JavaScript tests that import the server code and test it in isolation.
 * Extremely fast to execute.
 * Typically test pure code logic in isolation.
 
-##### Server-side REST Tests
+#### Server-side REST Tests
 
 `test/server/rest`
 
@@ -85,7 +85,7 @@ client to make real network requests to the server and validate responses.
 * Cover more of an "end-to-end" perspective on validation.
 
 
-#### Functional Tests
+### Functional Tests
 
 `test/func`
 
@@ -97,9 +97,9 @@ instance of the entire web application. These tests typically:
   actual web UI.
 * Test user behaviors in an end-to-end manner.
 
-### Notes
+## Notes
 
-#### Browser Compatibility.
+### Browser Compatibility
 
 The application and test samples should work for modern versions of Chrome,
 Safari, and Firefox and Internet Explorer 9+. Earlier versions of IE could

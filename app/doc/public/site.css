@@ -1,3 +1,16 @@
+/* ------------------------------------------------------------------
+ * Page
+ * --------------------------------------------------------------- */
+@media (min-width: 768px) {
+  .container-fluid {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Jumbotron Backgrounds
+ * --------------------------------------------------------------- */
 .backing-img {
   text-shadow: 0 5px 7px rgba(0,0,0,.8), 0 0 30px rgba(0,0,0,.375);
   color: #fff;
@@ -14,4 +27,58 @@
   background:    -moz-linear-gradient(left, #3F4757, #337ac7);
   background:     -ms-linear-gradient(left, #3F4757, #337ac7);
   background:      -o-linear-gradient(left, #3F4757, #337ac7);
+}
+
+/* ------------------------------------------------------------------
+ * Navbar
+ * --------------------------------------------------------------- */
+.navmenu {
+  width: 200px;
+}
+
+.navbar-toggle {
+  float: left;
+  margin-left: 10px;
+  background-color: #fff;
+}
+@media (max-width: 768px) {
+  .navbar-toggle {
+    opacity: 0.5;
+  }
+}
+
+.navmenu-inverse {
+  background-color: #3F4757;
+  border-color: #080808;
+}
+
+.nav-item {
+  line-height: 0.5;
+}
+.navmenu-inverse .navmenu-brand,
+.navmenu-inverse .navmenu-nav > li > a {
+  color: #ccc;
+}
+
+.nav-item-H2 {
+  font-weight: bold;
+}
+
+.nav-item-H3 {
+  padding-left: 10px
+}
+
+@media (min-width: 0) {
+  .navbar-toggle {
+    display: block; /* force showing the toggle */
+  }
+  .navbar {
+    right: auto;
+    background: none;
+    border: none;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+
+  }
 }
