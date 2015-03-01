@@ -1,0 +1,17 @@
+.backing-img {
+  text-shadow: 0 5px 7px rgba(0,0,0,.8), 0 0 30px rgba(0,0,0,.375);
+  color: #fff;
+  background: url("http://backbone-testing.com/doc/img/bg/ivy.jpg");
+  background-size: cover;
+}
+
+.backing-gradient {
+  color: #fff;
+  text-shadow: 0 5px 7px rgba(0,0,0,.8), 0 0 30px rgba(0,0,0,.375);
+  background-color: #337ac7;
+  background: -webkit-gradient(linear, left top, right top, from(#3F4757), to(#337ac7));
+  background: -webkit-linear-gradient(left, #3F4757, #337ac7);
+  background:    -moz-linear-gradient(left, #3F4757, #337ac7);
+  background:     -ms-linear-gradient(left, #3F4757, #337ac7);
+  background:      -o-linear-gradient(left, #3F4757, #337ac7);
+}

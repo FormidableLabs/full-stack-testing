@@ -10,6 +10,7 @@ var PORT = process.env.PORT || 3000;
 
 // Serve the application.
 app.use("/app/", express.static("app/public"));
+app.use("/public/", express.static("app/doc/public"));
 
 // Serve client-side tests.
 app.use("/app/js-test", express.static("app/js-test"));

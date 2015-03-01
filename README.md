@@ -1,8 +1,8 @@
 Full. Stack. Testing.
 ---------------------
 
-A full-stack sample JavaScript web application with simple reference tests
-for learning frontend, backend and functional testing.
+Learn frontend, backend, and functional testing with a full-stack JavaScript
+web application, sample tests, exercises, and more!
 
 [![Build Status][trav_img]][trav_site]
 [![Coverage Status][cov_img]][cov_site]
@@ -24,8 +24,8 @@ The frontend app uses [jQuery][] for DOM/AJAX work and is built with the
 wonderful [Webpack][] bundling tool. The backend server uses the ever popular
 [Express][] framework for our REST API.
 
-To test our application, we write **client**, **backend**, and **functional**
-tests using the following libraries:
+To test our application, we write **frontend**, **backend**, and **functional**
+tests with technologies that include:
 
 * **[Mocha](http://mochajs.org/)**: Suites, tests
 * **[Chai](http://chaijs.com/)**: Assertions
@@ -43,7 +43,7 @@ test/func
 
 For each of these
 
-#### Client-side Unit Tests
+#### Frontend Tests
 
 `test/client/spec`
 
@@ -58,7 +58,7 @@ files in isolation. Some aspects of these tests:
 * Run tests in the [browser][fst_test] or from command line.
 
 
-#### Server-side Unit / REST Tests
+#### Backend Tests
 
 `test/server`
 
