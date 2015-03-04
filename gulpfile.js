@@ -167,13 +167,17 @@ var _karmaAll = _karma({
 });
 
 gulp.task("karma:fast", _karmaFast);
-gulp.task("karma:ci", _karma(KARMA_COV, {
+gulp.task("karma:ci:linux", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Firefox"]
+}));
+gulp.task("karma:ci:win", _karma(KARMA_COV, {
+  browsers: ["IE"]
 }));
 gulp.task("karma:all", _karmaAll);
 
 gulp.task("test:frontend", ["clean:coverage:client"], _karmaFast);
-gulp.task("test:frontend:ci", ["karma:ci"]);
+gulp.task("test:frontend:ci:linux", ["karma:ci:linux"]);
+gulp.task("test:frontend:ci:win", ["karma:ci:win"]);
 gulp.task("test:frontend:all", ["clean:coverage:client"], _karmaAll);
 
 // ----------------------------------------------------------------------------
@@ -209,7 +213,8 @@ gulp.task("test:backend", ["clean:coverage:server"], function (done) {
 // TODO[RYAN]: Func tests.
 
 gulp.task("test", ["test:backend", "test:frontend"]);
-gulp.task("test:ci", ["test:backend", "test:frontend:ci"]);
+gulp.task("test:ci:linux", ["test:backend", "test:frontend:ci:linux"]);
+gulp.task("test:ci:win", ["test:backend", "test:frontend:ci:win"]);
 gulp.task("test:all", ["test:backend", "test:frontend:all"]);
 
 // ----------------------------------------------------------------------------
@@ -217,7 +222,8 @@ gulp.task("test:all", ["test:backend", "test:frontend:all"]);
 // ----------------------------------------------------------------------------
 gulp.task("check:base", ["jscs", "eslint"]);
 gulp.task("check", ["check:base", "test"]);
-gulp.task("check:ci", ["check:base", "test:ci"]);
+gulp.task("check:ci:linux", ["check:base", "test:ci:linux"]);
+gulp.task("check:ci:win", ["check:base", "test:ci:win"]);
 gulp.task("check:all", ["check:base", "test:all"]);
 
 // ----------------------------------------------------------------------------

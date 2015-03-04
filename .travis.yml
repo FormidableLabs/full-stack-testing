@@ -22,7 +22,7 @@ script:
   - ./node_modules/.bin/gulp build:dev
   - ./node_modules/.bin/gulp build:test
   # Run all checks.
-  - ./node_modules/.bin/gulp check:ci
+  - ./node_modules/.bin/gulp check:ci:linux
   # Manually send coverage reports to coveralls.
   # - First client result
   # - Only server result

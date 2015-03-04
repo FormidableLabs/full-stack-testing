@@ -36,6 +36,7 @@
     "karma-chrome-launcher": "0.1.7",
     "karma-coverage": "0.2.7",
     "karma-firefox-launcher": "0.1.4",
+    "karma-ie-launcher": "0.1.5",
     "karma-mocha": "0.1.10",
     "karma-mocha-reporter": "1.0.0",
     "karma-phantomjs-launcher": "0.1.4",
@@ -53,6 +54,8 @@
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
     "build-all": "npm run-script build && npm run-script build-test",
+    "build-win": "gulp build:all",
+    "check-win": "gulp check:ci:win",
     "postinstall": "node app/heroku/not-heroku.js || (npm run-script build-all && node app/heroku/install.js)"
   },
   "repository": {
