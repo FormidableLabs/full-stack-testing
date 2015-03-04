@@ -167,9 +167,13 @@ var _karmaAll = _karma({
 });
 
 gulp.task("karma:fast", _karmaFast);
-gulp.task("karma:ci", _karma(KARMA_COV, {
+gulp.task("karma:ci:linux", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Firefox"]
 }));
+gulp.task("karma:ci:osx", _karma(KARMA_COV, {
+  browsers: ["PhantomJS", "Firefox", "Chrome", "Safari"]
+}));
+gulp.task("karma:ci", ["karma:ci:osx"]);
 gulp.task("karma:all", _karmaAll);
 
 gulp.task("test:frontend", ["clean:coverage:client"], _karmaFast);
@@ -348,4 +352,6 @@ gulp.task("dev", sequence(
 ));
 gulp.task("prod", sequence(["watch:prod", "server", "server:sources"]));
 gulp.task("build", sequence("clean:dist", "build:prod"));
+gulp.task("build:all", sequence("clean:dist",
+  ["build:prod", "build:dev", "build:test"]));
 gulp.task("default", sequence("clean", ["build:dev", "build:test"], "check"));
