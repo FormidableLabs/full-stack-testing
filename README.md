@@ -4,7 +4,8 @@ Full. Stack. Testing.
 Learn frontend, backend, and functional testing with a full-stack JavaScript
 web application, sample tests, exercises, and more!
 
-[![Build Status][trav_img]][trav_site]
+[![Travis Status][trav_img]][trav_site]
+[![Appveyor Status][av_img]][av_site]
 [![Coverage Status][cov_img]][cov_site]
 
 ## Introduction
@@ -122,6 +123,9 @@ we've kept with a modern stack in this repository.
 [trav]: https://travis-ci.org/
 [trav_img]: https://api.travis-ci.org/FormidableLabs/full-stack-testing.svg
 [trav_site]: https://travis-ci.org/FormidableLabs/full-stack-testing
+[av]: https://ci.appveyor.com/
+[av_img]: https://ci.appveyor.com/api/projects/status/7fdajvg832480dnb?svg=true
+[av_site]: https://ci.appveyor.com/project/ryan-roemer/full-stack-testing
 [cov]: https://coveralls.io
 [cov_img]: https://img.shields.io/coveralls/FormidableLabs/full-stack-testing.svg
 [cov_site]: https://coveralls.io/r/FormidableLabs/full-stack-testing
