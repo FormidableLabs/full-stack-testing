@@ -3,10 +3,19 @@ language: node_js
 node_js:
   - 0.10
 
+os:
+  - osx
+
 before_install:
+  # **OS X**
+  # Likely unneeded: - brew update
+  - brew install caskroom/cask/brew-cask
+  - brew cask install google-chrome firefox
+  #
+  # **Linux**
   # GUI for real browsers.
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  #- export DISPLAY=:99.0
+  #- sh -e /etc/init.d/xvfb start
 
 branches:
   only:
@@ -15,10 +24,9 @@ branches:
 script:
   # Verify all builds actually work.
   - npm run-script build
-  - ./node_modules/.bin/gulp build:dev
-  - ./node_modules/.bin/gulp build:test
+  - ./node_modules/.bin/gulp build:all
   # Run all checks.
-  - ./node_modules/.bin/gulp check:ci
+  - ./node_modules/.bin/gulp check:ci:osx
   # Manually send coverage reports to coveralls.
   # - First client result
   # - Only server result
