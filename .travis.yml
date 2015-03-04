@@ -3,9 +3,6 @@ language: node_js
 node_js:
   - 0.10
 
-os:
-  - osx
-
 before_install:
   # **OS X**
   # Likely unneeded: - brew update
@@ -16,6 +13,10 @@ before_install:
   # GUI for real browsers.
   #- export DISPLAY=:99.0
   #- sh -e /etc/init.d/xvfb start
+
+branches:
+  only:
+    - master
 
 script:
   # Verify all builds actually work.
