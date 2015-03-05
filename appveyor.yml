@@ -16,5 +16,5 @@ test_script:
   - npm --version
   # Build and test.
   - npm run-script build
-  - node_modules\.bin\gulp gulp build:all
-  - node_modules\.bin\gulp gulp check:ci:win
+  - node_modules\.bin\gulp build:all
+  - node_modules\.bin\gulp check:ci:win
