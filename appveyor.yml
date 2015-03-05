@@ -10,11 +10,11 @@ install:
 
 build: off
 
-# Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
+  # Build environment.
   - node --version
   - npm --version
   # Build and test.
-  - npm run-script build-win
-  - npm run-script check-win
+  - npm run-script build
+  - node_modules\.bin\gulp gulp build:all
+  - node_modules\.bin\gulp gulp check:ci:win

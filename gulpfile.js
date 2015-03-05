@@ -354,4 +354,5 @@ gulp.task("dev", sequence(
 ));
 gulp.task("prod", sequence(["watch:prod", "server", "server:sources"]));
 gulp.task("build", sequence("clean:dist", "build:prod"));
+gulp.task("build:all", sequence("clean:dist", ["build:dev", "build:test"]));
 gulp.task("default", sequence("clean", ["build:dev", "build:test"], "check"));

@@ -17,11 +17,12 @@ branches:
     - master
 
 script:
-  # Verify all builds actually work.
+  # Build environment.
+  - node --version
+  - npm --version
+  # Build and test.
   - npm run-script build
-  - ./node_modules/.bin/gulp build:dev
-  - ./node_modules/.bin/gulp build:test
-  # Run all checks.
+  - ./node_modules/.bin/gulp build:all
   - ./node_modules/.bin/gulp check:ci:linux
   # Manually send coverage reports to coveralls.
   # - First client result

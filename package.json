@@ -53,9 +53,8 @@
     "check": "npm run-script build-all && npm run-script test && gulp check",
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
-    "build-all": "npm run-script build && npm run-script build-test",
-    "build-win": "gulp build:all",
-    "check-win": "gulp check:ci:win",
+    "build-cov": "webpack --config webpack.config.coverage.js",
+    "build-all": "npm run-script build && npm run-script build-test && npm run-script build-cov",
     "postinstall": "node app/heroku/not-heroku.js || (npm run-script build-all && node app/heroku/install.js)"
   },
   "repository": {
