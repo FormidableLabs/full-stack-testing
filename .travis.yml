@@ -27,4 +27,4 @@ script:
   # Manually send coverage reports to coveralls.
   # - First client result
   # - Only server result
-  - cat  "coverage/client/$(ls coverage/client | head -n 1)/lcov.info" "coverage/server/lcov.info" | ./node_modules/.bin/coveralls
+  - cat coverage/client/*/lcov.info coverage/server/lcov.info | ./node_modules/.bin/coveralls
