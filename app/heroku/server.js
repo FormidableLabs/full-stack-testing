@@ -16,6 +16,16 @@ app.use("/public/", express.static("app/doc/public"));
 app.use("/app/js-test", express.static("app/js-test"));
 app.use("/test/client", express.static("test/client"));
 
+// Marked options.
+require("marked").setOptions({
+  gfm: true,
+  tables: true,
+  highlight: function (code, lang) {
+    if (!lang || lang === "text") { return code; } // No highlight.
+    return require("highlight.js").highlightAuto(code).value;
+  }
+});
+
 // Serve docs as root.
 app.set("view engine", "jade");
 app.set("views", "app/doc");

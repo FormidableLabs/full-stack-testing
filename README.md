@@ -32,6 +32,22 @@ tests with technologies that include:
 * **[Chai](http://chaijs.com/)**: Assertions
 * **[Sinon.JS](http://sinonjs.org/)**: Fakes
 
+## Installation
+
+See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
+
+```bash
+$ git clone https://github.com/FormidableLabs/full-stack-testing.git
+$ cd full-stack-testing
+$ npm install
+
+# Mac/Linux
+$ gulp check
+
+# Windows
+$ gulp check:win
+```
+
 ## Tests
 
 The test suites in this project can be found in the following locations:
