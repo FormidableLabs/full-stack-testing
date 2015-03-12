@@ -36,7 +36,7 @@ tests with technologies that include:
 
 See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
 
-```bash
+```
 $ git clone https://github.com/FormidableLabs/full-stack-testing.git
 $ cd full-stack-testing
 $ npm install
