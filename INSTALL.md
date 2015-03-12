@@ -73,7 +73,7 @@ $ npm install
 If the above steps completed without any errors, you should be able to run the
 internal `gulp` task runner checks to verify everything works:
 
-```bash
+```sh
 # Mac/Linux
 $ gulp check
 

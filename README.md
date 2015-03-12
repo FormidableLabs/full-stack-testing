@@ -36,7 +36,7 @@ tests with technologies that include:
 
 See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
 
-```bash
+```sh
 $ git clone https://github.com/FormidableLabs/full-stack-testing.git
 $ cd full-stack-testing
 $ npm install
@@ -76,7 +76,7 @@ files in isolation. Some aspects of these tests:
 
 Build, then run the tests from the command line with:
 
-```bash
+```sh
 # Mac/Linux
 $ node_modules/.bin/webpack --config webpack.config.test.js
 $ node_modules/karma/bin/karma start test/client/karma.conf.js
@@ -103,7 +103,7 @@ Pure JavaScript tests that import the server code and test it in isolation.
 
 Run the tests with:
 
-```bash
+```sh
 # Mac/Linux
 $ node_modules/.bin/mocha --require test/server/setup.js test/server/spec
 
@@ -124,7 +124,7 @@ client to make real network requests to the server and validate responses.
 
 Run the tests with:
 
-```bash
+```sh
 TODO[RYAN]: NEED TESTS/COMMAND
 ```
 
@@ -142,7 +142,7 @@ instance of the entire web application. These tests typically:
 
 Run the tests with:
 
-```bash
+```sh
 TODO[RYAN]: NEED TESTS/COMMAND
 ```
 
