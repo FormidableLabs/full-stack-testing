@@ -32,6 +32,22 @@ tests with technologies that include:
 * **[Chai](http://chaijs.com/)**: Assertions
 * **[Sinon.JS](http://sinonjs.org/)**: Fakes
 
+## Getting Started
+
+See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
+
+```sh
+$ git clone https://github.com/FormidableLabs/full-stack-testing.git
+$ cd full-stack-testing
+$ npm install
+
+# Mac/Linux
+$ gulp check
+
+# Windows
+$ gulp check:win
+```
+
 ## Tests
 
 The test suites in this project can be found in the following locations:
@@ -58,6 +74,17 @@ files in isolation. Some aspects of these tests:
 * Typically test some aspect of the UI from the user perspective.
 * Run tests in the [browser][fst_test] or from command line.
 
+Build, then run the tests from the command line with:
+
+```sh
+# Mac/Linux
+$ node_modules/.bin/webpack --config webpack.config.test.js
+$ node_modules/karma/bin/karma start test/client/karma.conf.js
+
+# Windows
+$ node_modules\.bin\webpack --config webpack.config.test.js
+$ node_modules\karma\bin\karma start test\client\karma.conf.js
+```
 
 ### Backend Tests
 
@@ -74,6 +101,16 @@ Pure JavaScript tests that import the server code and test it in isolation.
 * Extremely fast to execute.
 * Typically test pure code logic in isolation.
 
+Run the tests with:
+
+```sh
+# Mac/Linux
+$ node_modules/.bin/mocha --require test/server/setup.js test/server/spec
+
+# Windows
+$ node_modules\.bin\mocha --require test\server\setup.js test\server\spec
+```
+
 #### Server-side REST Tests
 
 `test/server/rest`
@@ -85,6 +122,11 @@ client to make real network requests to the server and validate responses.
 * Fairly fast to execute (localhost network requests).
 * Cover more of an "end-to-end" perspective on validation.
 
+Run the tests with:
+
+```sh
+TODO[RYAN]: NEED TESTS/COMMAND
+```
 
 ### Functional Tests
 
@@ -98,14 +140,11 @@ instance of the entire web application. These tests typically:
   actual web UI.
 * Test user behaviors in an end-to-end manner.
 
-## Notes
+Run the tests with:
 
-### Browser Compatibility
-
-The application and test samples should work for modern versions of Chrome,
-Safari, and Firefox and Internet Explorer 9+. Earlier versions of IE could
-be readily supported with a few underlying library changes, but for simplicity,
-we've kept with a modern stack in this repository.
+```sh
+TODO[RYAN]: NEED TESTS/COMMAND
+```
 
 
 [jQuery]: http://jquery.com/

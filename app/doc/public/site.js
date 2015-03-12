@@ -1,8 +1,8 @@
 (function () {
   /*global $*/
-  // Remove the README header.
-  $("h2#full-stack-testing-").remove();
-
+  // --------------------------------------------------------------------------
+  // UI Extras
+  // --------------------------------------------------------------------------
   // Populate offcanvas menu if Jasny detected.
   var $nav = $("#nav");
   if ($nav.offcanvas) {
@@ -28,5 +28,17 @@
   } else {
     // Hide the nav wrapper if no offcanvas nav available.
     $(".nav-wrapper").hide();
+  }
+
+  // Add highlighting.
+  if (window.hljs) {
+    $("pre code").each(function (i, block) {
+      var cls = $(block).attr("class");
+
+      // Highlight all `lang-*` classed blocks.
+      if (cls && cls.indexOf("lang") === 0) {
+        window.hljs.highlightBlock(block);
+      }
+    });
   }
 })();
