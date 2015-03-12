@@ -23,6 +23,7 @@ script:
   - npm --version
   # Build and test.
   - npm run-script build
+  - npm run-script check
   - ./node_modules/.bin/gulp build:all
   - ./node_modules/.bin/gulp check:ci:linux
   # Manually send coverage reports to coveralls.

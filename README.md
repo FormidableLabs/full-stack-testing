@@ -42,10 +42,10 @@ $ cd full-stack-testing
 $ npm install
 
 # Mac/Linux
-$ node_modules/.bin/gulp check
+$ npm run-script check
 
 # Windows
-$ node_modules\.bin\gulp check:win
+$ npm run-script check-win
 ```
 
 ## Tests

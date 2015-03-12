@@ -51,6 +51,7 @@
     "test-backend": "mocha --require test/server/setup.js test/server/spec",
     "test": "npm run-script test-frontend && npm run-script test-backend",
     "check": "npm run-script build-all && npm run-script test && gulp check",
+    "check-win": "npm run-script build-all && npm run-script test && gulp check:win",
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
     "build-cov": "webpack --config webpack.config.coverage.js",
