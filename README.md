@@ -36,7 +36,7 @@ tests with technologies that include:
 
 See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
 
-```
+```bash
 $ git clone https://github.com/FormidableLabs/full-stack-testing.git
 $ cd full-stack-testing
 $ npm install
@@ -76,13 +76,13 @@ files in isolation. Some aspects of these tests:
 
 Build, then run the tests from the command line with:
 
-```
+```bash
 # Mac/Linux
 $ node_modules/.bin/webpack --config webpack.config.test.js
 $ node_modules/karma/bin/karma start test/client/karma.conf.js
 
 # Windows
-$ webpack --config webpack.config.test.js
+$ node_modules\.bin\webpack --config webpack.config.test.js
 $ node_modules\karma\bin\karma start test\client\karma.conf.js
 ```
 
@@ -101,6 +101,16 @@ Pure JavaScript tests that import the server code and test it in isolation.
 * Extremely fast to execute.
 * Typically test pure code logic in isolation.
 
+Run the tests with:
+
+```bash
+# Mac/Linux
+$ node_modules/.bin/mocha --require test/server/setup.js test/server/spec
+
+# Windows
+$ node_modules\.bin\mocha --require test\server\setup.js test\server\spec
+```
+
 #### Server-side REST Tests
 
 `test/server/rest`
@@ -112,6 +122,11 @@ client to make real network requests to the server and validate responses.
 * Fairly fast to execute (localhost network requests).
 * Cover more of an "end-to-end" perspective on validation.
 
+Run the tests with:
+
+```bash
+TODO[RYAN]: NEED TESTS/COMMAND
+```
 
 ### Functional Tests
 
@@ -124,6 +139,12 @@ instance of the entire web application. These tests typically:
 * Take a "black box" approach to the application and interact only via the
   actual web UI.
 * Test user behaviors in an end-to-end manner.
+
+Run the tests with:
+
+```bash
+TODO[RYAN]: NEED TESTS/COMMAND
+```
 
 
 [jQuery]: http://jquery.com/
