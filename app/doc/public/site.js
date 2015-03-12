@@ -1,8 +1,8 @@
 (function () {
   /*global $*/
-  // Remove the README header.
-  $("h2#full-stack-testing-").remove();
-
+  // --------------------------------------------------------------------------
+  // UI Extras
+  // --------------------------------------------------------------------------
   // Populate offcanvas menu if Jasny detected.
   var $nav = $("#nav");
   if ($nav.offcanvas) {

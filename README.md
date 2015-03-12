@@ -32,16 +32,7 @@ tests with technologies that include:
 * **[Chai](http://chaijs.com/)**: Assertions
 * **[Sinon.JS](http://sinonjs.org/)**: Fakes
 
-## TODO
-
-```js
-var foo = "hi";
-(function () {
-  console.log(foo);
-})();
-```
-
-## Installation
+## Getting Started
 
 See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
 
