@@ -74,6 +74,17 @@ files in isolation. Some aspects of these tests:
 * Typically test some aspect of the UI from the user perspective.
 * Run tests in the [browser][fst_test] or from command line.
 
+Build, then run the tests from the command line with:
+
+```
+# Mac/Linux
+$ node_modules/.bin/webpack --config webpack.config.test.js
+$ node_modules/karma/bin/karma start test/client/karma.conf.js
+
+# Windows
+$ webpack --config webpack.config.test.js
+$ node_modules\karma\bin\karma start test\client\karma.conf.js
+```
 
 ### Backend Tests
 
