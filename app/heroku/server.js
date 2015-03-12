@@ -19,11 +19,7 @@ app.use("/test/client", express.static("test/client"));
 // Marked options.
 require("marked").setOptions({
   gfm: true,
-  tables: true,
-  highlight: function (code, lang) {
-    if (!lang || lang === "text") { return code; } // No highlight.
-    return require("highlight.js").highlightAuto(code).value;
-  }
+  tables: true
 });
 
 // Serve docs as root.

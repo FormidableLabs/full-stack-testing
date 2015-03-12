@@ -29,4 +29,16 @@
     // Hide the nav wrapper if no offcanvas nav available.
     $(".nav-wrapper").hide();
   }
+
+  // Add highlighting.
+  if (window.hljs) {
+    $("pre code").each(function (i, block) {
+      var cls = $(block).attr("class");
+
+      // Highlight all `lang-*` classed blocks.
+      if (cls && cls.indexOf("lang") === 0) {
+        window.hljs.highlightBlock(block);
+      }
+    });
+  }
 })();
