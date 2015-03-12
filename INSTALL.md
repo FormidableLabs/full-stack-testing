@@ -75,10 +75,10 @@ internal `gulp` task runner checks to verify everything works:
 
 ```sh
 # Mac/Linux
-$ gulp check
+$ node_modules/.bin/gulp check
 
 # Windows
-$ gulp check:win
+$ node_modules\.bin\gulp check:win
 ```
 
 
