@@ -79,11 +79,11 @@ Build, then run the tests from the command line with:
 ```sh
 # Mac/Linux
 $ node_modules/.bin/webpack --config webpack.config.test.js
-$ node_modules/karma/bin/karma start test/client/karma.conf.js
+$ node node_modules/karma/bin/karma start test/client/karma.conf.js
 
 # Windows
 $ node_modules\.bin\webpack --config webpack.config.test.js
-$ node_modules\karma\bin\karma start test\client\karma.conf.js
+$ node node_modules\karma\bin\karma start test\client\karma.conf.js
 ```
 
 ### Backend Tests
