@@ -27,7 +27,7 @@ if (!isHeroku) {
 }
 
 // Write out a procfile.
-fs.writeFileSync(path.join(root, "Procfile"), "web: node app/heroku/server.js");
+fs.writeFileSync(path.join(root, "Procfile"), "web: node app/heroku/cluster.js");
 
 // NPM install certain dev. dependencies for Heroku usage.
 var npm = require("npm");
