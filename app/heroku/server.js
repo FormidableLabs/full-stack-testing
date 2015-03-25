@@ -7,6 +7,7 @@
 var express = require("express");
 var app = require("../../server");
 var PORT = process.env.PORT || 3000;
+var pkg = require("../../package.json");
 
 var marked = require("marked");
 var renderer = new marked.Renderer();
@@ -45,7 +46,10 @@ marked.setOptions({
 app.set("view engine", "jade");
 app.set("views", "app/doc");
 app.get("/", function (req, res) {
-  res.render("index");
+  res.render("index", {
+    // Pass in dependencies so we can use same version for CDN references.
+    deps: pkg.dependencies
+  });
 });
 
 // Start server.
