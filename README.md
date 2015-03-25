@@ -31,6 +31,8 @@ tests with technologies that include:
 * **[Mocha](http://mochajs.org/)**: Suites, tests
 * **[Chai](http://chaijs.com/)**: Assertions
 * **[Sinon.JS](http://sinonjs.org/)**: Fakes
+* **[SuperTest](https://github.com/visionmedia/supertest)**: REST requests,
+  asserts
 
 ## Getting Started
 
@@ -90,7 +92,16 @@ $ node node_modules\karma\bin\karma start test\client\karma.conf.js
 
 `test/server`
 
-Server-side (aka "backend") tests have two real flavors..
+Server-side (aka "backend") tests have two real flavors -- *unit* and *REST*
+tests. To run all the server-side tests, try:
+
+```sh
+# Mac/Linux
+$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server
+
+# Windows
+$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server
+```
 
 #### Server-side Unit Tests
 
@@ -105,10 +116,10 @@ Run the tests with:
 
 ```sh
 # Mac/Linux
-$ node_modules/.bin/mocha --require test/server/setup.js test/server/spec
+$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server/spec
 
 # Windows
-$ node_modules\.bin\mocha --require test\server\setup.js test\server\spec
+$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server\spec
 ```
 
 #### Server-side REST Tests
@@ -119,13 +130,18 @@ REST tests rely on spinning up the backend web application and using an HTTP
 client to make real network requests to the server and validate responses.
 
 * Must set up / tear down the application web server.
+* Issue real REST requests against server and verify responses.
 * Fairly fast to execute (localhost network requests).
 * Cover more of an "end-to-end" perspective on validation.
 
 Run the tests with:
 
 ```sh
-TODO[RYAN]: NEED TESTS/COMMAND
+# Mac/Linux
+$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server/rest
+
+# Windows
+$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server\rest
 ```
 
 ### Functional Tests

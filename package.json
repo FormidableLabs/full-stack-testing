@@ -48,7 +48,7 @@
   },
   "scripts": {
     "test-frontend": "node node_modules/karma/bin/karma start test/client/karma.conf.js",
-    "test-backend": "mocha --require test/server/setup.js test/server/spec",
+    "test-backend": "mocha --require test/server/setup.js --recursive test/server",
     "test": "npm run-script test-frontend && npm run-script test-backend",
     "check": "npm run-script build-all && npm run-script test && gulp check",
     "check-win": "npm run-script build-all && npm run-script test && gulp check:win",
