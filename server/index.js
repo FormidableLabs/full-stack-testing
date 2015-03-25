@@ -25,6 +25,7 @@ app.use("/app/js-dist", express.static("app/js-dist"));
 app.use("/node_modules", express.static("node_modules"));
 
 // Running this file as a script (the usual case).
+/* istanbul ignore next */
 if (require.main === module) {
   // Server static HTML page.
   app.use("/", express.static("app/public"));
