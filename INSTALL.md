@@ -4,12 +4,24 @@ Installation
 The web application and tests should work equally well on Windows and Mac/Linux
 with the following tools:
 
+* [Java](https://java.com)
 * [Git](http://git-scm.com)
 * [Node.js / NPM](http://nodejs.org/)
 * A (fairly) modern web browser. IE9+ on Windows. We recommend
   [Chrome](http://www.google.com/chrome/).
 
 ### Tools Installation
+
+#### Java
+
+Java is needed for Selenium integration tests and can be downloaded from
+[java.com/download](https://java.com/download).
+
+After download and installation, you should be able to run the following:
+
+```
+$ java -version
+```
 
 #### Git
 
