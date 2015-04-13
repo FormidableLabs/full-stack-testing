@@ -25,7 +25,7 @@ The frontend app uses [jQuery][] for DOM/AJAX work and is built with the
 wonderful [Webpack][] bundling tool. The backend server uses the ever popular
 [Express][] framework for our REST API.
 
-To test our application, we write **frontend**, **backend**, and **functional**
+To test our application, we write **backend**, **frontend**, and **functional**
 tests with technologies that include:
 
 * **[Mocha](http://mochajs.org/)**: Suites, tests
@@ -55,38 +55,12 @@ $ npm run-script check-win
 The test suites in this project can be found in the following locations:
 
 ```
-test/client
 test/server
+test/client
 test/func
 ```
 
 For each of these
-
-### Frontend Tests
-
-`test/client/spec`
-
-Client-side (aka "frontend") unit tests focus on one or more client application
-files in isolation. Some aspects of these tests:
-
-* Extremely fast to execute.
-* Execute via a test HTML driver page, not the web application HTML.
-* Must create mock DOM and data fixtures.
-* Mock out real browser network requests / time.
-* Typically test some aspect of the UI from the user perspective.
-* Run tests in the [browser][fst_test] or from command line.
-
-Build, then run the tests from the command line with:
-
-```sh
-# Mac/Linux
-$ node_modules/.bin/webpack --config webpack.config.test.js
-$ node node_modules/karma/bin/karma start test/client/karma.conf.js
-
-# Windows
-$ node_modules\.bin\webpack --config webpack.config.test.js
-$ node node_modules\karma\bin\karma start test\client\karma.conf.js
-```
 
 ### Backend Tests
 
@@ -142,6 +116,32 @@ $ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server
 
 # Windows
 $ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server\rest
+```
+
+### Frontend Tests
+
+`test/client/spec`
+
+Client-side (aka "frontend") unit tests focus on one or more client application
+files in isolation. Some aspects of these tests:
+
+* Extremely fast to execute.
+* Execute via a test HTML driver page, not the web application HTML.
+* Must create mock DOM and data fixtures.
+* Mock out real browser network requests / time.
+* Typically test some aspect of the UI from the user perspective.
+* Run tests in the [browser][fst_test] or from command line.
+
+Build, then run the tests from the command line with:
+
+```sh
+# Mac/Linux
+$ node_modules/.bin/webpack --config webpack.config.test.js
+$ node node_modules/karma/bin/karma start test/client/karma.conf.js
+
+# Windows
+$ node_modules\.bin\webpack --config webpack.config.test.js
+$ node node_modules\karma\bin\karma start test\client\karma.conf.js
 ```
 
 ### Functional Tests
