@@ -3,19 +3,19 @@ var converter = require("../../../server/converter");
 describe("spec/server/converter", function () {
 
   describe("camel", function () {
-    var testFn = converter.camel;
+    var camel = converter.camel;
 
     it("should handle base cases", function () {
-      expect(testFn()).to.equal("");
-      expect(testFn(null)).to.equal("");
-      expect(testFn("")).to.equal("");
+      expect(camel()).to.equal("");
+      expect(camel(null)).to.equal("");
+      expect(camel("")).to.equal("");
     });
 
     it("should convert snake case", function () {
-      expect(testFn("hi-there")).to.equal("hiThere");
-      expect(testFn("hi--there")).to.equal("hiThere");
-      expect(testFn("hi-thereUp")).to.equal("hiThereUp");
-      expect(testFn("hi-thereCAPS")).to.equal("hiThereCaps");
+      expect(camel("hi-there")).to.equal("hiThere");
+      expect(camel("hi--there")).to.equal("hiThere");
+      expect(camel("hi-thereUp")).to.equal("hiThereUp");
+      expect(camel("hi-thereCAPS")).to.equal("hiThereCaps");
       // WORKSHOP: ... should think of more conversion cases here!
     });
 
