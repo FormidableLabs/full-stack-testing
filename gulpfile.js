@@ -122,9 +122,7 @@ gulp.task("jscs", function () {
 // Tests: Client
 // ----------------------------------------------------------------------------
 // Use `node_modules` Phantom
-process.env.PHANTOMJS_BIN = process.platform === "win32" ?
-  "node_modules/phantomjs/lib/phantom/phantomjs.exe" :
-  "node_modules/.bin/phantomjs";
+process.env.PHANTOMJS_BIN = require("phantomjs").path;
 
 // TODO[RYAN]: Hook up Sauce Labs for everything in browser matrix.
 //
