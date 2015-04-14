@@ -6,17 +6,18 @@ environment:
 # Get the latest stable version of Node 0.STABLE.latest
 install:
   - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
-  - npm -g install npm@next
-  - npm install
+  # Install and use local, modern NPM
+  - npm install npm@next
+  - node_modules\.bin\npm install
 
 build: off
 
 test_script:
   # Build environment.
   - node --version
-  - npm --version
+  - node_modules\.bin\npm --version
   # Build and test.
-  - npm run-script build
-  - npm run-script check
+  - node_modules\.bin\npm run-script build
+  - node_modules\.bin\npm run-script check
   - node_modules\.bin\gulp build:all
   - node_modules\.bin\gulp check:ci:win
