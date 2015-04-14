@@ -42,12 +42,7 @@ See our [installation instructions](./INSTALL.md). Here's a `tl;dr` summary:
 $ git clone https://github.com/FormidableLabs/full-stack-testing.git
 $ cd full-stack-testing
 $ npm install
-
-# Mac/Linux
 $ npm run-script check
-
-# Windows
-$ npm run-script check-win
 ```
 
 ## Tests

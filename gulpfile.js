@@ -122,7 +122,9 @@ gulp.task("jscs", function () {
 // Tests: Client
 // ----------------------------------------------------------------------------
 // Use `node_modules` Phantom
-process.env.PHANTOMJS_BIN = "./node_modules/.bin/phantomjs";
+process.env.PHANTOMJS_BIN = process.platform === "win32" ?
+  "node_modules/phantomjs/lib/phantom/phantomjs.exe" :
+  "node_modules/.bin/phantomjs";
 
 // TODO[RYAN]: Hook up Sauce Labs for everything in browser matrix.
 //
@@ -170,14 +172,17 @@ gulp.task("karma:fast", _karmaFast);
 gulp.task("karma:ci:linux", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Firefox"]
 }));
-gulp.task("karma:win", _karma(KARMA_COV, {
-  browsers: ["IE"]
+gulp.task("karma:ci:win", _karma(KARMA_COV, {
+  browsers: ["PhantomJS", "IE"]
+}));
+gulp.task("karma:win-all", _karma({
+  browsers: ["PhantomJS", "Chrome", "Firefox", "IE"]
 }));
 gulp.task("karma:all", _karmaAll);
 
 gulp.task("test:frontend", ["clean:coverage:client"], _karmaFast);
 gulp.task("test:frontend:ci:linux", ["karma:ci:linux"]);
-gulp.task("test:frontend:win", ["karma:win"]);
+gulp.task("test:frontend:ci:win", ["karma:ci:win"]);
 gulp.task("test:frontend:all", ["clean:coverage:client"], _karmaAll);
 
 // ----------------------------------------------------------------------------
@@ -214,7 +219,7 @@ gulp.task("test:backend", ["clean:coverage:server"], function (done) {
 
 gulp.task("test", ["test:backend", "test:frontend"]);
 gulp.task("test:ci:linux", ["test:backend", "test:frontend:ci:linux"]);
-gulp.task("test:win", ["test:backend", "test:frontend:win"]);
+gulp.task("test:ci:win", ["test:backend", "test:frontend:ci:win"]);
 gulp.task("test:all", ["test:backend", "test:frontend:all"]);
 
 // ----------------------------------------------------------------------------
@@ -223,12 +228,11 @@ gulp.task("test:all", ["test:backend", "test:frontend:all"]);
 // Dev
 gulp.task("check:base", ["jscs", "eslint"]);
 gulp.task("check", ["check:base", "test"]);
-gulp.task("check:win", ["check:base", "test:win"]);
 gulp.task("check:all", ["check:base", "test:all"]);
 
 // CI
 gulp.task("check:ci:linux", ["check:base", "test:ci:linux"]);
-gulp.task("check:ci:win", ["check:win"]);
+gulp.task("check:ci:win", ["check:base", "test:ci:win"]);
 
 // ----------------------------------------------------------------------------
 // Builders
