@@ -86,11 +86,8 @@ If the above steps completed without any errors, you should be able to run the
 internal `gulp` task runner checks to verify everything works:
 
 ```sh
-# Mac/Linux
+# Mac/Linux/Windows
 $ npm run-script check
-
-# Windows
-$ npm run-script check-win
 ```
 
 
