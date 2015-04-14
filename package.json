@@ -40,9 +40,12 @@
     "mocha": "2.2.4",
     "phantomjs": "1.9.16",
     "recluster": "0.4.0",
+    "rowdy": "0.1.2",
+    "selenium-standalone": "4.2.2",
     "sinon": "1.14.1",
     "sinon-chai": "2.7.0",
-    "supertest": "0.15.0"
+    "supertest": "0.15.0",
+    "wd": "0.3.11"
   },
   "scripts": {
     "test-frontend": "node node_modules/karma/bin/karma start test/client/karma.conf.js",

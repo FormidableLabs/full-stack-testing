@@ -66,10 +66,10 @@ tests. To run all the server-side tests, try:
 
 ```sh
 # Mac/Linux
-$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server
+$ node_modules/.bin/mocha --opts test/server/mocha.opts test/server
 
 # Windows
-$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server
+$ node_modules\.bin\mocha --opts test\server\mocha.opts test\server
 ```
 
 #### Server-side Unit Tests
@@ -85,10 +85,10 @@ Run the tests with:
 
 ```sh
 # Mac/Linux
-$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server/spec
+$ node_modules/.bin/mocha --opts test/server/mocha.opts test/server/spec
 
 # Windows
-$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server\spec
+$ node_modules\.bin\mocha --opts test\server\mocha.opts test\server\spec
 ```
 
 #### Server-side REST Tests
@@ -107,10 +107,10 @@ Run the tests with:
 
 ```sh
 # Mac/Linux
-$ node_modules/.bin/mocha --require test/server/setup.js --recursive test/server/rest
+$ node_modules/.bin/mocha --opts test/server/mocha.opts test/server/rest
 
 # Windows
-$ node_modules\.bin\mocha --require test\server\setup.js --recursive test\server\rest
+$ node_modules\.bin\mocha --opts test\server\mocha.opts test\server\rest
 ```
 
 ### Frontend Tests
@@ -154,7 +154,11 @@ instance of the entire web application. These tests typically:
 Run the tests with:
 
 ```sh
-TODO[RYAN]: NEED TESTS/COMMAND
+# Mac/Linux
+$ node_modules/.bin/mocha --opts test/func/mocha.opts test/func/spec
+
+# Windows
+$ node_modules\.bin\mocha --opts test\func\mocha.opts test\func\spec
 ```
 
 
