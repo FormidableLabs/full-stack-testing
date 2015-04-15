@@ -49,8 +49,9 @@
   },
   "scripts": {
     "test-frontend": "node node_modules/karma/bin/karma start test/client/karma.conf.js",
-    "test-backend": "mocha --require test/server/setup.js --recursive test/server",
-    "test": "npm run-script test-frontend && npm run-script test-backend",
+    "test-backend": "mocha --opts test/server/mocha.opts test/server",
+    "test-func": "mocha --opts test/func/mocha.opts test/func",
+    "test": "npm run-script test-frontend && npm run-script test-backend && npm run-script test-func",
     "check": "npm run-script build-all && npm run-script test && gulp check",
     "build": "webpack --config webpack.config.js",
     "build-test": "webpack --config webpack.config.test.js",
