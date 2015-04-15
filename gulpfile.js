@@ -238,10 +238,10 @@ gulp.task("test:func", ["clean:coverage:func"], function (done) {
 
 // TODO: More `test:func:MORE_OPTIONS` stuff...
 
-gulp.task("test", sequence("test:backend", "test:frontend", "test:func"));
-gulp.task("test:ci:linux", sequence("test:backend", "test:frontend:ci:linux"));
-gulp.task("test:ci:win", sequence("test:backend", "test:frontend:ci:win"));
-gulp.task("test:all", sequence("test:backend", "test:frontend:all"));
+gulp.task("test", ["test:backend", "test:func", "test:frontend"]);
+gulp.task("test:ci:linux", ["test:backend", "test:func", "test:frontend:ci:linux"]);
+gulp.task("test:ci:win", ["test:backend", "test:func", "test:frontend:ci:win"]);
+gulp.task("test:all", ["test:backend", "test:func", "test:frontend:all"]);
 
 // ----------------------------------------------------------------------------
 // Quality
