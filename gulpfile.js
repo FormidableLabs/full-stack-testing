@@ -186,57 +186,34 @@ gulp.task("test:frontend:all", ["clean:coverage:client"], _karmaAll);
 // ----------------------------------------------------------------------------
 // Tests: Server, Functional
 // ----------------------------------------------------------------------------
-gulp.task("test:backend", ["clean:coverage:server"], function (done) {
-  // Global setup.
-  require("./test/server/setup");
+var _mocha = function (type, testFiles) {
+  return function (done) {
+    // First, cover files.
+    gulp
+      .src(BACKEND_JS_APP_FILES)
+      .pipe(istanbul({
+        includeUntested: true
+      }))
+      .pipe(istanbul.hookRequire())
+      .on("finish", function () {
+        // Second, run the tests
+        require("./test/" + type + "/setup");
 
-  // First, cover files.
-  gulp
-    .src(BACKEND_JS_APP_FILES)
-    .pipe(istanbul({
-      includeUntested: true
-    }))
-    .pipe(istanbul.hookRequire())
-    .on("finish", function () {
-      // Second, run the tests
-      gulp
-        .src(BACKEND_JS_TEST_FILES, { read: false })
-        .pipe(mocha())
-        .pipe(istanbul.writeReports({
-          dir: "./coverage/server",
-          reportOpts: { dir: "./coverage/server" },
-          reporters: ["lcov", "json", "text-summary"] // "text",
-        }))
-        .on("end", done);
-    });
-});
+        gulp
+          .src(testFiles, { read: false })
+          .pipe(mocha())
+          .pipe(istanbul.writeReports({
+            dir: "./coverage/" + type,
+            reportOpts: { dir: "./coverage/" + type },
+            reporters: ["lcov", "json", "text-summary"] // "text",
+          }))
+          .on("end", done);
+      });
+  };
+};
 
-// TODO: Abstract the istanbul setup to a common function.
-
-gulp.task("test:func", ["clean:coverage:func"], function (done) {
-  // Global setup.
-  require("./test/func/setup");
-
-  // First, cover files.
-  gulp
-    .src(BACKEND_JS_APP_FILES)
-    .pipe(istanbul({
-      includeUntested: true
-    }))
-    .pipe(istanbul.hookRequire())
-    .on("finish", function () {
-      // Second, run the tests
-      gulp
-        .src(FUNC_JS_TEST_FILES, { read: false })
-        .pipe(mocha())
-        .pipe(istanbul.writeReports({
-          dir: "./coverage/func",
-          reportOpts: { dir: "./coverage/func" },
-          reporters: ["lcov", "json", "text-summary"] // "text",
-        }))
-        .on("end", done);
-    });
-});
+gulp.task("test:backend", ["clean:coverage:server"], _mocha("server", BACKEND_JS_TEST_FILES));
+gulp.task("test:func", ["clean:coverage:func"], _mocha("func", FUNC_JS_TEST_FILES));
 
 // TODO: More `test:func:MORE_OPTIONS` stuff...
 // TODO: Maybe a base test:func/backend?
