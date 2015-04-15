@@ -211,6 +211,8 @@ gulp.task("test:backend", ["clean:coverage:server"], function (done) {
     });
 });
 
+// TODO: Abstract the istanbul setup to a common function.
+
 gulp.task("test:func", ["clean:coverage:func"], function (done) {
   // Global setup.
   require("./test/func/setup");
@@ -237,6 +239,7 @@ gulp.task("test:func", ["clean:coverage:func"], function (done) {
 });
 
 // TODO: More `test:func:MORE_OPTIONS` stuff...
+// TODO: Maybe a base test:func/backend?
 
 gulp.task("test", ["test:backend", "test:func", "test:frontend"]);
 gulp.task("test:ci:linux", ["test:backend", "test:func", "test:frontend:ci:linux"]);
