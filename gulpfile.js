@@ -201,9 +201,7 @@ gulp.task("test:backend", ["clean:coverage:server"], function (done) {
       // Second, run the tests
       gulp
         .src(BACKEND_JS_TEST_FILES, { read: false })
-        .pipe(mocha({
-          reporter: "spec"
-        }))
+        .pipe(mocha())
         .pipe(istanbul.writeReports({
           dir: "./coverage/server",
           reportOpts: { dir: "./coverage/server" },
@@ -213,12 +211,37 @@ gulp.task("test:backend", ["clean:coverage:server"], function (done) {
     });
 });
 
-// TODO[RYAN]: Func tests.
+gulp.task("test:func", ["clean:coverage:func"], function (done) {
+  // Global setup.
+  require("./test/func/setup");
 
-gulp.task("test", ["test:backend", "test:frontend"]);
-gulp.task("test:ci:linux", ["test:backend", "test:frontend:ci:linux"]);
-gulp.task("test:ci:win", ["test:backend", "test:frontend:ci:win"]);
-gulp.task("test:all", ["test:backend", "test:frontend:all"]);
+  // First, cover files.
+  gulp
+    .src(BACKEND_JS_APP_FILES)
+    .pipe(istanbul({
+      includeUntested: true
+    }))
+    .pipe(istanbul.hookRequire())
+    .on("finish", function () {
+      // Second, run the tests
+      gulp
+        .src(FUNC_JS_TEST_FILES, { read: false })
+        .pipe(mocha())
+        .pipe(istanbul.writeReports({
+          dir: "./coverage/func",
+          reportOpts: { dir: "./coverage/func" },
+          reporters: ["lcov", "json", "text-summary"] // "text",
+        }))
+        .on("end", done);
+    });
+});
+
+// TODO: More `test:func:MORE_OPTIONS` stuff...
+
+gulp.task("test", sequence("test:backend", "test:frontend", "test:func"));
+gulp.task("test:ci:linux", sequence("test:backend", "test:frontend:ci:linux"));
+gulp.task("test:ci:win", sequence("test:backend", "test:frontend:ci:win"));
+gulp.task("test:all", sequence("test:backend", "test:frontend:all"));
 
 // ----------------------------------------------------------------------------
 // Quality
@@ -290,10 +313,17 @@ gulp.task("clean:coverage:server", function () {
     .pipe(rimraf());
 });
 
+gulp.task("clean:coverage:func", function () {
+  return gulp
+    .src(["coverage/func"], { read: false })
+    .pipe(rimraf());
+});
+
 gulp.task("clean", [
   "clean:dist",
   "clean:coverage:client",
-  "clean:coverage:server"
+  "clean:coverage:server",
+  "clean:coverage:func"
 ]);
 
 // -----------
