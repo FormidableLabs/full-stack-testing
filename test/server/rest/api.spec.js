@@ -1,6 +1,5 @@
 var app = require("../../../server");
 var PORT = process.env.TEST_PORT || 3002;
-var server;
 
 // Wraps `superagent` with test methods.
 // See: http://visionmedia.github.io/superagent/
@@ -8,18 +7,19 @@ var server;
 var request = require("supertest");
 
 describe("rest/api", function () {
+  var server;
 
   // Start up (and later stop) a single instance of the server so that we can
   // issue REST commands against it for our tests.
+  //
   // *Note*: Often you will need to reset data / server state to a known
   // starting point in `beforeEach`/`afterEach` methods.
   before(function (done) {
-    // Start and capture server.
     server = app.listen(PORT, done);
   });
 
   after(function (done) {
-    if (!server) { done(); }
+    if (!server) { return done(); }
     server.close(done);
   });
 
