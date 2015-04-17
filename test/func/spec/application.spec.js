@@ -58,9 +58,27 @@ describe("func/application", function () {
         // Get the web application page.
         .get(HOST)
 
+        // Check we start with empty text.
+        .waitForElementByCss(".js-input")
+        .text()
+        .then(function (text) {
+          expect(text).to.equal("");
+        })
+
+        // Type a complex string.
+        .waitForElementByCss(".js-input")
+        .type("my new-string_rocks")
+
         // Select the "Convert" button and click it.
         .waitForElementByCss(".js-submit")
         .click()
+
+        // Verify the conversion
+        .waitForElementByCss(".panel-body")
+        .text()
+        .then(function (text) {
+          expect(text).to.equal("myNewStringRocks");
+        })
 
         // ... and we're done!
         .nodeify(done);
