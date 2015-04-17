@@ -1,10 +1,13 @@
 var app = require("../../../server");
 var PORT = process.env.FUNC_PORT || 3003;
+var HOST = "http://127.0.0.1:" + PORT;
 
-//
-var rowdy = require("rowdy").adapters.mocha;
+// Rowdy helpers and adapter.
+var rowdy = require("rowdy");
+var adapter = rowdy.adapters.mocha;
 
 describe("func/application", function () {
+  var client;
   var server;
 
   // --------------------------------------------------------------------------
@@ -16,10 +19,10 @@ describe("func/application", function () {
   //
   // For multi-file tests this setup should be extracted to a `base.spec.js`
   // file and executed **once** for the entire test suite.
-  rowdy.before();
-  rowdy.beforeEach();
-  rowdy.afterEach();
-  rowdy.after();
+  adapter.before();
+  adapter.beforeEach();
+  adapter.afterEach();
+  adapter.after();
 
   // --------------------------------------------------------------------------
   // Dev. Server
@@ -33,6 +36,11 @@ describe("func/application", function () {
   // For multi-file tests this setup should be extracted to a `base.spec.js`
   // file and executed **once** for the entire test suite.
   before(function (done) {
+    // The `adapter.before();` call has the side effect of instantiating a
+    // Selenium / WD.js client that we can extract here.
+    client = adapter.client;
+
+    // Start the dev. server.
     server = app.listen(PORT, done);
   });
 
@@ -44,13 +52,23 @@ describe("func/application", function () {
   // --------------------------------------------------------------------------
   // Suites
   // --------------------------------------------------------------------------
-  describe("all the things", function () {
-    // TODO[RYAN]
-    it("TODO");
-  });
-
   describe("camel", function () {
+    it("should convert complex input", function (done) {
+      client
+        // Get the web application page.
+        .get(HOST)
+
+        // Select the "Convert" button and click it.
+        .waitForElementByCss(".js-submit")
+        .click()
+
+        // ... and we're done!
+        .nodeify(done);
+    });
+
+
     // TODO[RYAN]
+    it("should display result for empty input");
   });
 
   describe("snake", function () {
@@ -58,6 +76,10 @@ describe("func/application", function () {
   });
 
   describe("dash", function () {
+    // TODO[RYAN]
+  });
+
+  describe("all the things", function () {
     // TODO[RYAN]
   });
 

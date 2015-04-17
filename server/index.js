@@ -5,6 +5,7 @@ var express = require("express");
 var app = module.exports = express();
 var converter = require("./converter");
 var PORT = process.env.PORT || 3000;
+var NODE_ENV = process.env.NODE_ENV;
 
 // Application REST endpoints.
 app.get("/api/camel", function (req, res) {
@@ -24,12 +25,16 @@ app.get("/api/dash", function (req, res) {
 app.use("/app/js-dist", express.static("app/js-dist"));
 app.use("/node_modules", express.static("node_modules"));
 
-// Running this file as a script (the usual case).
+// Only add root handler if script or a test environment.
 /* istanbul ignore next */
-if (require.main === module) {
+if (require.main === module || NODE_ENV === "test" || NODE_ENV === "func") {
   // Server static HTML page.
   app.use("/", express.static("app/public"));
+}
 
+// Actually start server if script.
+/* istanbul ignore next */
+if (require.main === module) {
   // Start application.
   app.listen(PORT);
 }
