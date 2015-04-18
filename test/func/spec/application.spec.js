@@ -104,16 +104,27 @@ describe("func/application", function () {
         .nodeify(done);
     });
 
-    // TODO[RYAN]
+    // ------------------------------------------------------------------------
+    // WORKSHOP: IMPLEMENT_TESTS
+    // ------------------------------------------------------------------------
     it("should display result for empty input");
+    it("should convert simple input 'hi there' to 'hiThere'");
   });
 
   describe("snake", function () {
-    // TODO[RYAN]
+    // ------------------------------------------------------------------------
+    // WORKSHOP: IMPLEMENT_TESTS
+    // ------------------------------------------------------------------------
+    it("should display result for empty input");
+    it("should convert simple input 'hi there' to 'hi_there'");
   });
 
   describe("dash", function () {
-    // TODO[RYAN]
+    // ------------------------------------------------------------------------
+    // WORKSHOP: IMPLEMENT_TESTS
+    // ------------------------------------------------------------------------
+    it("should display result for empty input");
+    it("should convert simple input 'hi there' to 'hi-there'");
   });
 
   describe("all the things", function () {
@@ -127,10 +138,11 @@ describe("func/application", function () {
         .click()
 
         // Click the "all the things" option.
-        .waitForElementByCss(".js-convert-types[data-convert='camel,snake,dash']")
+        .waitForElementByCss(
+          ".js-convert-types[data-convert='camel,snake,dash']")
         .click()
 
-        // Type a complex string.
+        // Type a complex string and the "enter key" to invoke a conversion.
         .waitForElementByCss(".js-input")
         .type(" all_the things!" + ENTER_KEY)
 
@@ -161,7 +173,11 @@ describe("func/application", function () {
         .nodeify(done);
     });
 
-    // TODO[RYAN]
+    // ------------------------------------------------------------------------
+    // WORKSHOP: IMPLEMENT_TESTS
+    // ------------------------------------------------------------------------
+    it("should display three empty results for empty input");
+    it("should convert simple input 'hi there' using a click on 'Convert'");
   });
 
 });
