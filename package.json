@@ -58,7 +58,7 @@
     "build-cov": "webpack --config webpack.config.coverage.js",
     "build-all": "npm run-script build && npm run-script build-test && npm run-script build-cov",
     "install-selenium": "selenium-standalone install",
-    "postinstall": "node app/heroku/not-heroku.js || (node app/heroku/install.js && npm run-script build-all)"
+    "postinstall": "npm run-script install-selenium && node app/heroku/not-heroku.js || (node app/heroku/install.js && npm run-script build-all)"
   },
   "repository": {
     "type": "git",
