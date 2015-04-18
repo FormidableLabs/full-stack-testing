@@ -154,9 +154,9 @@ describe("func/application", function () {
           //
           // Here, we're going to extract the three values from converting to
           // all the different types.
-          return $(".panel-body").map(function () {
-            return $(this).text();
-          });
+          return $(".panel-body")
+            .map(function () { return $(this).text(); })
+            .toArray();
         }))
         .then(function (values) {
           // Here's a tricky part -- our conversion results can come back in
