@@ -4,11 +4,14 @@ var HOST = "http://127.0.0.1:" + PORT;
 
 // WD helpers.
 // https://github.com/admc/wd/blob/master/lib/special-keys.js
-var ENTER_KEY = require("wd").SPECIAL_KEYS.Enter;
+var wd = require("wd");
+var asserters = wd.asserters;
+var ENTER_KEY = wd.SPECIAL_KEYS.Enter;
 
 // Rowdy helpers and adapter.
 var rowdy = require("rowdy");
 var adapter = rowdy.adapters.mocha;
+var helpers = rowdy.helpers;
 
 describe("func/application", function () {
   var client;
@@ -119,13 +122,13 @@ describe("func/application", function () {
         .waitForElementByCss(".js-input")
         .type(" all_the things!" + ENTER_KEY)
 
-        // TODO[RYAN]
-        // // Verify the conversion
-        // .waitForElementByCss(".panel-body")
-        // .text()
-        // .then(function (text) {
-        //   expect(text).to.equal("myNewStringRocks");
-        // })
+        // Get all of the result panels using JavaScript!
+        .waitFor(asserters.jsCondition(helpers.js.fn(function () {
+          // This is a **client-side** JavaScript function, returning values
+          // from the web application page.
+          /*global $*/
+          return $(".notes-item .note-delete").length === 0;
+        })))
 
         // ... and we're done!
         .nodeify(done);
