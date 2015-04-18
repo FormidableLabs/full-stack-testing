@@ -2,6 +2,10 @@ var app = require("../../../server");
 var PORT = process.env.FUNC_PORT || 3003;
 var HOST = "http://127.0.0.1:" + PORT;
 
+// WD helpers.
+// https://github.com/admc/wd/blob/master/lib/special-keys.js
+var ENTER_KEY = require("wd").SPECIAL_KEYS.Enter;
+
 // Rowdy helpers and adapter.
 var rowdy = require("rowdy");
 var adapter = rowdy.adapters.mocha;
@@ -53,12 +57,13 @@ describe("func/application", function () {
   // Suites
   // --------------------------------------------------------------------------
   describe("camel", function () {
-    it("should convert complex input", function (done) {
+    it("should convert complex input w/ extra spaces + click", function (done) {
       client
         // Get the web application page.
         .get(HOST)
 
         // Check we start with empty text.
+        // **Note**: _Could_ do this in all tests, but we'll just do it 1x here.
         .waitForElementByCss(".js-input")
         .text()
         .then(function (text) {
@@ -67,7 +72,7 @@ describe("func/application", function () {
 
         // Type a complex string.
         .waitForElementByCss(".js-input")
-        .type("my new-string_rocks")
+        .type("  my   new-string_rocks")
 
         // Select the "Convert" button and click it.
         .waitForElementByCss(".js-submit")
@@ -84,7 +89,6 @@ describe("func/application", function () {
         .nodeify(done);
     });
 
-
     // TODO[RYAN]
     it("should display result for empty input");
   });
@@ -98,6 +102,35 @@ describe("func/application", function () {
   });
 
   describe("all the things", function () {
+    it("should convert complex input w/ enter key", function (done) {
+      client
+        // Get the web application page.
+        .get(HOST)
+
+        // Click the conversion types drowpdown.
+        .waitForElementByCss(".js-convert-label")
+        .click()
+
+        // Click the "all the things" option.
+        .waitForElementByCss(".js-convert-types[data-convert='camel,snake,dash']")
+        .click()
+
+        // Type a complex string.
+        .waitForElementByCss(".js-input")
+        .type(" all_the things!" + ENTER_KEY)
+
+        // TODO[RYAN]
+        // // Verify the conversion
+        // .waitForElementByCss(".panel-body")
+        // .text()
+        // .then(function (text) {
+        //   expect(text).to.equal("myNewStringRocks");
+        // })
+
+        // ... and we're done!
+        .nodeify(done);
+    });
+
     // TODO[RYAN]
   });
 
