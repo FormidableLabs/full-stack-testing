@@ -9,7 +9,7 @@ install:
   # Install and use local, modern NPM
   - npm install npm@next
   - node_modules\.bin\npm install
-  - node_modules\.bin\npm install-selenium
+  - node_modules\.bin\npm run-script install-selenium
 
 build: off
 
