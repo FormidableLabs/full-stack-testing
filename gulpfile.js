@@ -62,7 +62,6 @@ var FUNC_JS_TEST_FILES = [
 // ----------------------------------------------------------------------------
 // EsLint
 // ----------------------------------------------------------------------------
-// TODO[RYAN]: Consider `sandbox`?
 var _eslint = function (files, cfg) {
   return function () {
     return gulp
@@ -125,6 +124,7 @@ gulp.task("jscs", function () {
 process.env.PHANTOMJS_BIN = require("phantomjs").path;
 
 // TODO[RYAN]: Hook up Sauce Labs for everything in browser matrix.
+// https://github.com/FormidableLabs/full-stack-testing/issues/4
 //
 // SauceLabs tag.
 // var SAUCE_BRANCH = process.env.TRAVIS_BRANCH || "local";
@@ -215,9 +215,9 @@ var _mocha = function (type, testFiles) {
 gulp.task("test:backend", ["clean:coverage:server"], _mocha("server", BACKEND_JS_TEST_FILES));
 gulp.task("test:func", ["clean:coverage:func"], _mocha("func", FUNC_JS_TEST_FILES));
 
-// TODO: More `test:func:MORE_OPTIONS` stuff...
-// TODO: Maybe a base test:func/backend?
-
+// ----------------------------------------------------------------------------
+// Tests: Aggregations
+// ----------------------------------------------------------------------------
 gulp.task("test", ["test:backend", "test:func", "test:frontend"]);
 gulp.task("test:ci:linux", ["test:backend", "test:func", "test:frontend:ci:linux"]);
 // TODO: Add back `"test:func",` after fix for
