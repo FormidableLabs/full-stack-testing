@@ -5,7 +5,7 @@ var path = require("path");
 var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
-module.exports = _.extend({}, _.omit(prodCfg, "plugins"), {
+module.exports = _.merge({}, _.omit(prodCfg, "plugins"), {
   cache: true,
   context: path.join(__dirname, "test/client"),
   entry: "./main",

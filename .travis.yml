@@ -28,5 +28,5 @@ script:
   - ./node_modules/.bin/gulp check:ci:linux
   # Manually send coverage reports to coveralls.
   # - Aggregate client results
-  # - Single server result
-  - cat coverage/client/*/lcov.info coverage/server/lcov.info | ./node_modules/.bin/coveralls
+  # - Single server and func test results
+  - cat coverage/client/*/lcov.info coverage/{server,func}/lcov.info | ./node_modules/.bin/coveralls

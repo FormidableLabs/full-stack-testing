@@ -186,39 +186,42 @@ gulp.task("test:frontend:all", ["clean:coverage:client"], _karmaAll);
 // ----------------------------------------------------------------------------
 // Tests: Server, Functional
 // ----------------------------------------------------------------------------
-gulp.task("test:backend", ["clean:coverage:server"], function (done) {
-  // Global setup.
-  require("./test/server/setup");
+var _mocha = function (type, testFiles) {
+  return function (done) {
+    // First, cover files.
+    gulp
+      .src(BACKEND_JS_APP_FILES)
+      .pipe(istanbul({
+        includeUntested: true
+      }))
+      .pipe(istanbul.hookRequire())
+      .on("finish", function () {
+        // Second, run the tests
+        require("./test/" + type + "/setup");
 
-  // First, cover files.
-  gulp
-    .src(BACKEND_JS_APP_FILES)
-    .pipe(istanbul({
-      includeUntested: true
-    }))
-    .pipe(istanbul.hookRequire())
-    .on("finish", function () {
-      // Second, run the tests
-      gulp
-        .src(BACKEND_JS_TEST_FILES, { read: false })
-        .pipe(mocha({
-          reporter: "spec"
-        }))
-        .pipe(istanbul.writeReports({
-          dir: "./coverage/server",
-          reportOpts: { dir: "./coverage/server" },
-          reporters: ["lcov", "json", "text-summary"] // "text",
-        }))
-        .on("end", done);
-    });
-});
+        gulp
+          .src(testFiles, { read: false })
+          .pipe(mocha())
+          .pipe(istanbul.writeReports({
+            dir: "./coverage/" + type,
+            reportOpts: { dir: "./coverage/" + type },
+            reporters: ["lcov", "json", "text-summary"] // "text",
+          }))
+          .on("end", done);
+      });
+  };
+};
 
-// TODO[RYAN]: Func tests.
+gulp.task("test:backend", ["clean:coverage:server"], _mocha("server", BACKEND_JS_TEST_FILES));
+gulp.task("test:func", ["clean:coverage:func"], _mocha("func", FUNC_JS_TEST_FILES));
 
-gulp.task("test", ["test:backend", "test:frontend"]);
-gulp.task("test:ci:linux", ["test:backend", "test:frontend:ci:linux"]);
-gulp.task("test:ci:win", ["test:backend", "test:frontend:ci:win"]);
-gulp.task("test:all", ["test:backend", "test:frontend:all"]);
+// TODO: More `test:func:MORE_OPTIONS` stuff...
+// TODO: Maybe a base test:func/backend?
+
+gulp.task("test", ["test:backend", "test:func", "test:frontend"]);
+gulp.task("test:ci:linux", ["test:backend", "test:func", "test:frontend:ci:linux"]);
+gulp.task("test:ci:win", ["test:backend", "test:func", "test:frontend:ci:win"]);
+gulp.task("test:all", ["test:backend", "test:func", "test:frontend:all"]);
 
 // ----------------------------------------------------------------------------
 // Quality
@@ -290,10 +293,17 @@ gulp.task("clean:coverage:server", function () {
     .pipe(rimraf());
 });
 
+gulp.task("clean:coverage:func", function () {
+  return gulp
+    .src(["coverage/func"], { read: false })
+    .pipe(rimraf());
+});
+
 gulp.task("clean", [
   "clean:dist",
   "clean:coverage:client",
-  "clean:coverage:server"
+  "clean:coverage:server",
+  "clean:coverage:func"
 ]);
 
 // -----------

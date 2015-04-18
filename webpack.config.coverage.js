@@ -5,7 +5,7 @@ var path = require("path");
 var _ = require("lodash");
 var testCfg = require("./webpack.config.test");
 
-module.exports = _.extend({}, _.omit(testCfg, "output"), {
+module.exports = _.merge({}, _.omit(testCfg, "output"), {
   output: {
     path: path.join(__dirname, "app/js-test"),
     filename: "bundle-coverage.js"
