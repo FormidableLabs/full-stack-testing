@@ -21,6 +21,12 @@ test_script:
   # Build environment.
   - node --version
   - node_modules\.bin\npm --version
+
+  # TODO: Add back in after fix for
+  # https://github.com/FormidableLabs/full-stack-testing/issues/33
+  #- node_modules\.bin\npm run-script build-all
+  #- node_modules\.bin\npm run-script check
+
   # Build and test.
   - node_modules\.bin\gulp build:all
   - set ROWDY_OPTIONS='{ "clientLogger":true, "serverLogger":true }'

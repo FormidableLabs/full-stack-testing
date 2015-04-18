@@ -220,7 +220,9 @@ gulp.task("test:func", ["clean:coverage:func"], _mocha("func", FUNC_JS_TEST_FILE
 
 gulp.task("test", ["test:backend", "test:func", "test:frontend"]);
 gulp.task("test:ci:linux", ["test:backend", "test:func", "test:frontend:ci:linux"]);
-gulp.task("test:ci:win", ["test:backend", "test:func", "test:frontend:ci:win"]);
+// TODO: Add back `"test:func",` after fix for
+// https://github.com/FormidableLabs/full-stack-testing/issues/33
+gulp.task("test:ci:win", ["test:backend", "test:frontend:ci:win"]);
 gulp.task("test:all", ["test:backend", "test:func", "test:frontend:all"]);
 
 // ----------------------------------------------------------------------------
