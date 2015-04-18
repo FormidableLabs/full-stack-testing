@@ -22,8 +22,6 @@ test_script:
   - node --version
   - node_modules\.bin\npm --version
   # Build and test.
-  - node_modules\.bin\npm run-script build
-  - node_modules\.bin\npm run-script check
   - node_modules\.bin\gulp build:all
   - set ROWDY_OPTIONS='{ "clientLogger":true, "serverLogger":true }'
   - node_modules\.bin\gulp check:ci:win
