@@ -29,4 +29,5 @@ script:
   # Manually send coverage reports to coveralls.
   # - Aggregate client results
   # - Single server and func test results
+  - ls coverage/client/*/lcov.info coverage/{server,func}/lcov.info | cat
   - cat coverage/client/*/lcov.info coverage/{server,func}/lcov.info | ./node_modules/.bin/coveralls

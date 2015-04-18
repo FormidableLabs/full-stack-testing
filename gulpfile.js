@@ -162,7 +162,7 @@ var _karma = function () {
 // Fast: Phantom-only, w/ coverage
 var _karmaFast = _karma(KARMA_COV);
 // All: No coverage, all Mac browsers
-var _karmaAll = _karma({
+var _karmaAll = _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Chrome", "Firefox", "Safari"]
 });
 
@@ -173,7 +173,7 @@ gulp.task("karma:ci:linux", _karma(KARMA_COV, {
 gulp.task("karma:ci:win", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "IE"]
 }));
-gulp.task("karma:win-all", _karma({
+gulp.task("karma:win-all", _karma(KARMA_COV, {
   browsers: ["PhantomJS", "Chrome", "Firefox", "IE"]
 }));
 gulp.task("karma:all", _karmaAll);
