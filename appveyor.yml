@@ -1,3 +1,4 @@
+# Good template: https://github.com/gruntjs/grunt/blob/master/appveyor.yml
 environment:
   matrix:
     - nodejs_version: 0.10
@@ -31,3 +32,11 @@ test_script:
   - node_modules\.bin\gulp build:all
   - set ROWDY_OPTIONS='{ "clientLogger":true, "serverLogger":true }'
   - node_modules\.bin\gulp check:ci:win
+
+matrix:
+  fast_finish: true
+
+cache:
+  - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
+  - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json         # npm cache
+  - node_modules -> package.json                                        # local npm modules
