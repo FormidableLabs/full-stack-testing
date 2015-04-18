@@ -13,6 +13,10 @@ install:
 
 build: off
 
+branches:
+  only:
+    - master
+
 test_script:
   # Build environment.
   - node --version

@@ -24,8 +24,8 @@ script:
   # Build and test.
   - npm run-script build
   - npm run-script check
-  - ./node_modules/.bin/gulp build:all
-  - ./node_modules/.bin/gulp check:ci:linux
+  - node_modules/.bin/gulp build:all
+  - node_modules/.bin/gulp check:ci:linux
   # Manually send coverage reports to coveralls.
   # - Aggregate client results
   # - Single server and func test results
