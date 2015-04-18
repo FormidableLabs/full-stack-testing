@@ -5,7 +5,7 @@ environment:
 
 # Get the latest stable version of Node 0.STABLE.latest
 install:
-  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  - ps: Install-Product node $env:nodejs_version
   # Install and use local, modern NPM
   - npm install npm@next
   - node_modules\.bin\npm install
