@@ -5,7 +5,6 @@ var HOST = "http://127.0.0.1:" + PORT;
 // WD helpers.
 // https://github.com/admc/wd/blob/master/lib/special-keys.js
 var wd = require("wd");
-var asserters = wd.asserters;
 var ENTER_KEY = wd.SPECIAL_KEYS.Enter;
 
 // Rowdy helpers and adapter.
@@ -16,6 +15,12 @@ var helpers = rowdy.helpers;
 describe("func/application", function () {
   var client;
   var server;
+
+  // --------------------------------------------------------------------------
+  // Mocha
+  // --------------------------------------------------------------------------
+  // Set a Mocha global timeout of 10 seconds to allow for test wonkiness.
+  this.timeout(10000);
 
   // --------------------------------------------------------------------------
   // Selenium (WD.js/Rowdy) initialization
@@ -31,6 +36,17 @@ describe("func/application", function () {
   adapter.afterEach();
   adapter.after();
 
+  before(function (done) {
+    // The `adapter.before();` call has the side effect of instantiating a
+    // Selenium / WD.js client that we can extract here.
+    client = adapter.client;
+
+    // Set a global Selenium timeout that is _before_ our test timeout.
+    client
+      .setImplicitWaitTimeout(200)
+      .nodeify(done);
+  });
+
   // --------------------------------------------------------------------------
   // Dev. Server
   // --------------------------------------------------------------------------
@@ -43,10 +59,6 @@ describe("func/application", function () {
   // For multi-file tests this setup should be extracted to a `base.spec.js`
   // file and executed **once** for the entire test suite.
   before(function (done) {
-    // The `adapter.before();` call has the side effect of instantiating a
-    // Selenium / WD.js client that we can extract here.
-    client = adapter.client;
-
     // Start the dev. server.
     server = app.listen(PORT, done);
   });
@@ -123,12 +135,27 @@ describe("func/application", function () {
         .type(" all_the things!" + ENTER_KEY)
 
         // Get all of the result panels using JavaScript!
-        .waitFor(asserters.jsCondition(helpers.js.fn(function () {
+        .safeEval(helpers.js.fn(function () {
+          /*global $*/
           // This is a **client-side** JavaScript function, returning values
           // from the web application page.
-          /*global $*/
-          return $(".notes-item .note-delete").length === 0;
-        })))
+          //
+          // Here, we're going to extract the three values from converting to
+          // all the different types.
+          return $(".panel-body").map(function () {
+            return $(this).text();
+          });
+        }))
+        .then(function (values) {
+          // Here's a tricky part -- our conversion results can come back in
+          // any order. So, we either have to sort on the array, or check that
+          // the array contains values in any position.
+          expect(values)
+            .to.have.length(3).and
+            .to.contain("allTheThings!").and
+            .to.contain("all-the-things!").and
+            .to.contain("all_the_things!");
+        })
 
         // ... and we're done!
         .nodeify(done);

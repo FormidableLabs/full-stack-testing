@@ -12,9 +12,9 @@ var PLUGIN_MAP = {
     "\n//# sourceMappingURL=http://127.0.0.1:3001/app/js-map/[url]"
   ),
 
-  // Make globals available.
+  // Make globals available to other vendor libraries.
   PROVIDE: new webpack.ProvidePlugin({
-    jQuery: "jquery"
+    jQuery: "jquery" // For Bootstrap.
   })
 };
 

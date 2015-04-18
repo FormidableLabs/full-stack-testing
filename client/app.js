@@ -1,7 +1,7 @@
 /**
  * Client application entry point.
  */
-var $ = require("jquery");
+var $ = window.$ = require("jquery"); // Add jQuery to window for test ease.
 require("bootstrap"); // Empty require to enable bootstrap JS
 
 var Converter = require("./converter");
