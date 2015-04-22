@@ -65,6 +65,12 @@ Server-side (aka "backend") tests have two real flavors -- *unit* and *REST*
 tests. To run all the server-side tests, try:
 
 ```sh
+$ npm run-script test-backend
+```
+
+*OR*
+
+```sh
 # Mac/Linux
 $ node_modules/.bin/mocha --opts test/server/mocha.opts test/server
 
@@ -126,8 +132,16 @@ files in isolation. Some aspects of these tests:
 * Mock out real browser network requests / time.
 * Typically test some aspect of the UI from the user perspective.
 * Run tests in the [browser][fst_test] or from command line.
+* May need to be bundled like your application code.
 
 Build, then run the tests from the command line with:
+
+```sh
+$ npm run-script build-test
+$ npm run-script test-frontend
+```
+
+*OR*
 
 ```sh
 # Mac/Linux
@@ -154,11 +168,52 @@ instance of the entire web application. These tests typically:
 Run the tests with:
 
 ```sh
+$ npm run-script test-func
+```
+
+*OR*
+
+```sh
 # Mac/Linux
 $ node_modules/.bin/mocha --opts test/func/mocha.opts test/func/spec
 
 # Windows
 $ node_modules\.bin\mocha --opts test\func\mocha.opts test\func\spec
+```
+
+#### Alternate Browser / Options
+
+Our functional tests are configured via
+[rowdy](https://github.com/FormidableLabs/rowdy) which has various logging
+and browser options in its
+[config file](https://github.com/FormidableLabs/rowdy/blob/master/config.js).
+
+For example, on **Mac/Linux**:
+
+```sh
+# Chrome Tests
+$ ROWDY_SETTINGS="local.firefox" npm run-script test-func
+
+# Additional Logging
+$ ROWDY_OPTIONS='{ "clientLogger": true, "serverLogger": true }' \
+  npm run-script test-func
+
+# Initiate a Sauce Labs remote test
+$ ROWDY_OPTIONS='{ "clientLogger": true }' \
+  ROWDY_SETTINGS="sauceLabs.safari7-mac" \
+  SAUCE_USERNAME=<INSERT> \
+  SAUCE_ACCESS_KEY=<INSERT> \
+  npm run-script test-func
+```
+
+and similarly on **Windows**:
+
+```sh
+# Internet Explorer Tests
+$ cmd /C "set ROWDY_SETTINGS=local.ie && npm run-script test-func"
+
+# Additional Logging
+$ cmd /C "set ROWDY_OPTIONS={ "clientLogger": true, "serverLogger": true } && npm run-script test-func"
 ```
 
 ## Sample Web App
