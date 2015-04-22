@@ -58,6 +58,7 @@
     "build-cov": "webpack --config webpack.config.coverage.js",
     "build-all": "npm run-script build && npm run-script build-test && npm run-script build-cov",
     "start": "gulp dev",
+    "watch": "gulp watch",
     "install-selenium": "selenium-standalone install",
     "postinstall": "npm run-script install-selenium && node app/heroku/not-heroku.js || (node app/heroku/install.js && npm run-script build-all)"
   },
