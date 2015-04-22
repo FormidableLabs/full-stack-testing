@@ -28,8 +28,8 @@ $ java -version
 The `git` version control client can be downloaded from
 [git-scm.com/downloads](http://git-scm.com/downloads).
 
-***Windows Note***: On Windows, make sure to select the following options
-from the installer:
+***Windows Note***: On Windows, make sure to select the following options from
+the installer:
 
 * "Select Components" &rarr; **Defaults**
 * "Adjusting your PATH environment" &rarr; **"Run Git from the Windows Command Prompt"**
@@ -45,6 +45,14 @@ $ git --version
 
 The `node` JavaScript engine and `npm` package manager can be downloaded and
 installed from [nodejs.org/download/](http://nodejs.org/download/).
+
+***Windows Note***: We have encountered file-watching issues on Windows with
+Node.js `v0.12`
+([#35](https://github.com/FormidableLabs/full-stack-testing/issues/35),
+[#28](https://github.com/FormidableLabs/full-stack-testing/issues/28)),
+so we advise that you install the latest Node.js `v0.10.x` branch, which is
+currently available at:
+[nodejs.org/dist/v0.10.38/node-v0.10.38-x86.msi](http://nodejs.org/dist/v0.10.38/node-v0.10.38-x86.msi)
 
 After download and installation, you should be able to run the following:
 
