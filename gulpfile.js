@@ -3,6 +3,7 @@
  */
 var path = require("path");
 var _ = require("lodash");
+var exec = require("child_process").exec;
 
 // Gulp
 var gulp = require("gulp");
@@ -339,8 +340,21 @@ gulp.task("build:test", ["build:frontend:test", "build:frontend:coverage"]);
 // ----------------------------------------------------------------------------
 // Servers
 // ----------------------------------------------------------------------------
-// Dev. server
-gulp.task("server", function () {
+// Dev. servers
+// Exec'ed
+gulp.task("server:dev", function (done) {
+  exec("node " + path.resolve("server/index.js"), {
+    env: {
+      PORT: process.env.PORT || "3000",
+      NODE_ENV: "development"
+    }
+  }, done);
+});
+
+// Auto-restart
+// BUG: Doesn't work on windows.
+// https://github.com/FormidableLabs/full-stack-testing/issues/28
+gulp.task("server:nodemon", function () {
   nodemon({
     script: "server/index.js",
     ext: "js,json",
@@ -368,7 +382,12 @@ gulp.task("server:sources", function () {
 gulp.task("dev", sequence(
   "clean",
   ["watch:dev", "watch:frontend:test", "watch:frontend:coverage"],
-  ["server", "server:sources"]
+  ["server:dev", "server:sources"]
+));
+gulp.task("watch", sequence(
+  "clean",
+  ["watch:dev", "watch:frontend:test", "watch:frontend:coverage"],
+  ["server:nodemon", "server:sources"]
 ));
 gulp.task("prod", sequence(["watch:prod", "server", "server:sources"]));
 gulp.task("build", sequence("clean:dist", "build:prod"));
