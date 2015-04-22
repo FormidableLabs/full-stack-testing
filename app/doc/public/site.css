@@ -52,8 +52,9 @@
   border-color: #080808;
 }
 
-.nav-item {
-  line-height: 0.5;
+li.nav-item > a {
+  padding: 5px 15px;
+  line-height: 1.2em;
 }
 .navmenu-inverse .navmenu-brand,
 .navmenu-inverse .navmenu-nav > li > a {
