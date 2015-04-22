@@ -199,8 +199,10 @@ $ ROWDY_OPTIONS='{ "clientLogger": true, "serverLogger": true }' \
   npm run-script test-func
 
 # Initiate a Sauce Labs remote test
-$ ROWDY_OPTIONS='{ "clientLogger": true }' \
-  ROWDY_SETTINGS="sauceLabs.safari7-mac" \
+# **Note**: Need a web-accessible host to hit with tests.
+$ TEST_HOST="http://full-stack-testing.formidablelabs.com/app/" \
+  ROWDY_OPTIONS='{ "clientLogger": true }' \
+  ROWDY_SETTINGS="sauceLabs.ie11-win8" \
   SAUCE_USERNAME=<INSERT> \
   SAUCE_ACCESS_KEY=<INSERT> \
   npm run-script test-func
