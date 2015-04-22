@@ -167,7 +167,20 @@ The "Converter" is a simple utility to camel/dash/snake case a string by way
 of a single-page-application issuing XHR commands to a REST command backed
 by a server that does the conversions.
 
-To run just the dev. server (after a build), do:
+We actually use **two** servers for our project:
+
+* [127.0.0.1:3000](http://127.0.0.1:3000/): The **dev server**, which serves
+  the sample converter application
+* [127.0.0.1:3001](http://127.0.0.1:3001/): The **sources server**, which is
+  a simple static file server that serves **source maps** for the main
+  application and the **test HTML page**.
+* [127.0.0.1:3001/test/client/test.html](http://127.0.0.1:3001/test/client/test.html):
+  Frontend (client) unit tests.
+
+### Standalone Dev Server
+
+If you're already _done_ with the frontend build, then you can manually run
+just the dev server with:
 
 ```sh
 # Mac/Linux
@@ -177,12 +190,21 @@ $ node server/index.js
 $ node server\index.js
 ```
 
-To run the dev. server with a live watch on frontend JS (e.g., for working
-on frontend tests):
+**Note**: This does not run the source maps server nor does it rebuild / restart
+servers on frontend / backend code changes.
+
+### Single Build + Dev/Sources Servers
+
+To do a single build and run the dev/sources servers, do:
 
 ```sh
 $ npm start
 ```
+
+**Note**: You will have to restart the server on backend code changes manually
+and rebuild your frontend JS on changes.
+
+### Watched Rebuilds + Dev/Sources Servers
 
 To watch _both_ frontend and backend files for changes and rebuild / restart
 via nodemon use:
@@ -190,14 +212,6 @@ via nodemon use:
 ```sh
 $ npm run-script watch
 ```
-
-From there, you can navigate to:
-
-* [127.0.0.1:3000](http://127.0.0.1:3000/): The converter application.
-* [127.0.0.1:3001](http://127.0.0.1:3001/): Helper static server that
-  servers source maps for main application and the test HTML page.
-* [127.0.0.1:3001/test/client/test.html](http://127.0.0.1:3001/test/client/test.html):
-  Frontend (client) unit tests.
 
 **Note**: The `gulp watch` / `npm run-script watch` commands are currently
 broken on Windows with Node `v0.12` for both:
