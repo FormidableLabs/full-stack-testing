@@ -188,11 +188,7 @@ To watch _both_ frontend and backend files for changes and rebuild / restart
 via nodemon use:
 
 ```sh
-# Mac/Linux
-$ node_modules/.bin/gulp watch
-
-# Windows
-$ node_modules\.bin\gulp watch
+$ npm run-script watch
 ```
 
 From there, you can navigate to:
@@ -203,8 +199,13 @@ From there, you can navigate to:
 * [127.0.0.1:3001/test/client/test.html](http://127.0.0.1:3001/test/client/test.html):
   Frontend (client) unit tests.
 
-**Note**: `gulp watch` is currently broken on Windows.
-See [Issue #28](https://github.com/FormidableLabs/full-stack-testing/issues/28).
+**Note**: The `gulp watch` / `npm run-script watch` commands are currently
+broken on Windows with Node `v0.12` for both:
+
+* Webpack: [#35](https://github.com/FormidableLabs/full-stack-testing/issues/35)
+* Nodemon: [#28](https://github.com/FormidableLabs/full-stack-testing/issues/28)
+
+due to some file-watching issues.
 
 [jQuery]: http://jquery.com/
 [Webpack]: http://webpack.github.io/
