@@ -8,6 +8,7 @@ describe("YOUR_SERVER_REST_TEST_SUITE", function () {
   var server;
 
   before(function (done) {
+    app.serveRoot();
     server = app.listen(PORT, done);
   });
   after(function (done) {

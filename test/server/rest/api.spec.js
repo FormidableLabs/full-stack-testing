@@ -15,6 +15,7 @@ describe("rest/api", function () {
   // *Note*: Often you will need to reset data / server state to a known
   // starting point in `beforeEach`/`afterEach` methods.
   before(function (done) {
+    app.serveRoot();
     server = app.listen(PORT, done);
   });
 

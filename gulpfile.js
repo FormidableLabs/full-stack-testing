@@ -3,7 +3,6 @@
  */
 var path = require("path");
 var _ = require("lodash");
-var exec = require("child_process").exec;
 
 // Gulp
 var gulp = require("gulp");
@@ -342,13 +341,14 @@ gulp.task("build:test", ["build:frontend:test", "build:frontend:coverage"]);
 // ----------------------------------------------------------------------------
 // Dev. servers
 // Exec'ed
-gulp.task("server:dev", function (done) {
-  exec("node " + path.resolve("server/index.js"), {
-    env: {
-      PORT: process.env.PORT || "3000",
-      NODE_ENV: "development"
-    }
-  }, done);
+gulp.task("server:dev", function () {
+  var app = require("./server/index");
+  var port = process.env.PORT || "3000";
+  app.serveRoot();
+  app.listen(port, function () {
+    gutil.log(cyan("[server]"),
+      "Start dev server at: http://127.0.0.1:" + port);
+  });
 });
 
 // Auto-restart

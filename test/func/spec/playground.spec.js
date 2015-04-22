@@ -30,6 +30,7 @@ describe("YOUR_FUNCTIONAL_TEST_SUITE", function () {
 
   // Dev. Server
   before(function (done) {
+    app.serveRoot();
     server = app.listen(PORT, done);
   });
   after(function (done) {

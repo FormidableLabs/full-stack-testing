@@ -60,6 +60,7 @@ describe("func/application", function () {
   // file and executed **once** for the entire test suite.
   before(function (done) {
     // Start the dev. server.
+    app.serveRoot();
     server = app.listen(PORT, done);
   });
 
