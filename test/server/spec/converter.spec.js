@@ -12,10 +12,10 @@ describe("spec/server/converter", function () {
     });
 
     it("should convert snake case", function () {
-      expect(camel("hi-there")).to.equal("hiThere");
-      expect(camel("hi--there")).to.equal("hiThere");
-      expect(camel("hi-thereUp")).to.equal("hiThereUp");
-      expect(camel("hi-thereCAPS")).to.equal("hiThereCaps");
+      expect(camel("hi_there")).to.equal("hiThere");
+      expect(camel("hi__there")).to.equal("hiThere");
+      expect(camel("hi_thereUp")).to.equal("hiThereUp");
+      expect(camel("hi_thereCAPS")).to.equal("hiThereCaps");
       // WORKSHOP: ... should think of more conversion cases here!
     });
 
@@ -23,7 +23,7 @@ describe("spec/server/converter", function () {
     // WORKSHOP: IMPLEMENT_TESTS
     // ------------------------------------------------------------------------
     it("should not convert inapplicable strings");
-    it("should leave unchanged camel case");
+    it("should leave camel case unchanged");
     it("should convert dash case");
     it("should convert mixed cases");
   });
@@ -34,7 +34,7 @@ describe("spec/server/converter", function () {
     // ------------------------------------------------------------------------
     it("should handle base cases");
     it("should not convert inapplicable strings");
-    it("should leave unchanged snake case");
+    it("should leave snake case unchanged");
     it("should convert camel case");
     it("should convert dash case");
     it("should convert mixed cases");
@@ -46,7 +46,7 @@ describe("spec/server/converter", function () {
     // ------------------------------------------------------------------------
     it("should handle base cases");
     it("should not convert inapplicable strings");
-    it("should leave unchanged dash case");
+    it("should leave dash case unchanged");
     it("should convert snake case");
     it("should convert camel case");
     it("should convert mixed cases");
