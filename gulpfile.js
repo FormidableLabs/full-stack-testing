@@ -123,13 +123,6 @@ gulp.task("jscs", function () {
 // Use `node_modules` Phantom
 process.env.PHANTOMJS_BIN = require("phantomjs").path;
 
-// TODO[RYAN]: Hook up Sauce Labs for everything in browser matrix.
-// https://github.com/FormidableLabs/full-stack-testing/issues/4
-//
-// SauceLabs tag.
-// var SAUCE_BRANCH = process.env.TRAVIS_BRANCH || "local";
-// var SAUCE_TAG = process.env.SAUCE_USERNAME + "@" + SAUCE_BRANCH;
-
 // Karma coverage.
 var KARMA_COV = {
   reporters: ["spec", "coverage"],
