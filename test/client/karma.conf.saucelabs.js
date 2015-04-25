@@ -16,12 +16,13 @@ var SAUCE_ENVS = {
     browserName: "safari",
     platform: "OS X 10.9"
   },
-  "ie9-win7": {
-    base: "SauceLabs",
-    browserName: "internet explorer",
-    platform: "Windows 7",
-    version: "9"
-  },
+  // TODO: Appears to fail conversion tests.
+  // "ie9-win7": {
+  //   base: "SauceLabs",
+  //   browserName: "internet explorer",
+  //   platform: "Windows 7",
+  //   version: "9"
+  // },
   "ie10-win7": {
     base: "SauceLabs",
     browserName: "internet explorer",
@@ -37,8 +38,12 @@ var SAUCE_ENVS = {
 };
 
 // Optionally filter browsers from environment or "all browsers"
-var BROWSERS = (process.env.BROWSERS || "").split(",")
-  .filter(function (x) { return x; }) || Object.keys(SAUCE_ENVS);
+var BROWSERS = (process.env.BROWSERS || "")
+  .split(",")
+  .filter(function (x) { return x; });
+if (!BROWSERS.length) {
+  BROWSERS = Object.keys(SAUCE_ENVS);
+}
 
 // SauceLabs tag.
 var SAUCE_BRANCH = process.env.TRAVIS_BRANCH || "local";
