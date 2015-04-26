@@ -5,45 +5,40 @@ var path = require("path");
 var baseCfg = require("./karma.conf");
 
 // Sauce labs environments.
+//
+// These are custom definitions that we can later invoke specifically on the
+// command line with `--browsers KEY1,KEY2`, etc.
 var SAUCE_ENVS = {
-  "chrome-mac": {
+  "sl-chrome-mac": {
     base: "SauceLabs",
     browserName: "chrome",
     platform: "OS X 10.9"
   },
-  "safari-mac": {
+  "sl-safari-mac": {
     base: "SauceLabs",
     browserName: "safari",
     platform: "OS X 10.9"
   },
   // TODO: Appears to fail conversion tests.
-  // "ie9-win7": {
+  // "sl-ie9-win7": {
   //   base: "SauceLabs",
   //   browserName: "internet explorer",
   //   platform: "Windows 7",
   //   version: "9"
   // },
-  "ie10-win7": {
+  "sl-ie10-win7": {
     base: "SauceLabs",
     browserName: "internet explorer",
     platform: "Windows 7",
     version: "10"
   },
-  "ie11-win7": {
+  "sl-ie11-win7": {
     base: "SauceLabs",
     browserName: "internet explorer",
     platform: "Windows 7",
     version: "11"
   }
 };
-
-// Optionally filter browsers from environment or "all browsers"
-var BROWSERS = (process.env.BROWSERS || "")
-  .split(",")
-  .filter(function (x) { return x; });
-if (!BROWSERS.length) {
-  BROWSERS = Object.keys(SAUCE_ENVS);
-}
 
 // SauceLabs tag.
 var SAUCE_BRANCH = process.env.TRAVIS_BRANCH || "local";
@@ -62,6 +57,6 @@ module.exports = function(config) {
     // https://github.com/angular/angular.js/blob/master/karma-shared.conf.js
     captureTimeout: 0, // Pass through to SL.
     customLaunchers: SAUCE_ENVS,
-    browsers: BROWSERS
+    browsers: Object.keys(SAUCE_ENVS)
   });
 };
