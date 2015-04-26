@@ -7,6 +7,7 @@ web application, sample tests, exercises, and more!
 [![Travis Status][trav_img]][trav_site]
 [![Appveyor Status][av_img]][av_site]
 [![Coverage Status][cov_img]][cov_site]
+[![Sauce Labs Status][sauce_site]][sauce_img]
 
 ## Introduction
 
@@ -153,6 +154,28 @@ $ node_modules\.bin\webpack --config webpack.config.test.js
 $ node node_modules\karma\bin\karma start test\client\karma.conf.js
 ```
 
+
+#### Sauce Labs
+
+We provide an alternate Karma configuration file,
+[`test/client/karma.conf.saucelabs.js`](https://github.com/FormidableLabs/full-stack-testing/blob/master/test/client/karma.conf.saucelabs.js),
+to run some popular browsers on Sauce Labs
+
+For example, on **Mac/Linux**:
+
+```sh
+# Run all configured browsers in Sauce Labs
+$ SAUCE_USERNAME=<INSERT> \
+  SAUCE_ACCESS_KEY=<INSERT> \
+  node node_modules/karma/bin/karma start test/client/karma.conf.saucelabs.js
+
+# Run comma-separated list of browsers
+$ BROWSERS="ie10-win7,ie11-win7" \
+  SAUCE_USERNAME=<INSERT> \
+  SAUCE_ACCESS_KEY=<INSERT> \
+  node node_modules/karma/bin/karma start test/client/karma.conf.saucelabs.js
+```
+
 ### Functional Tests
 
 `test/func`
@@ -181,7 +204,7 @@ $ node_modules/.bin/mocha --opts test/func/mocha.opts test/func/spec
 $ node_modules\.bin\mocha --opts test\func\mocha.opts test\func\spec
 ```
 
-#### Alternate Browser / Options
+#### Browsers / Options / Sauce Labs
 
 Our functional tests are configured via
 [rowdy](https://github.com/FormidableLabs/rowdy) which has various logging
@@ -299,3 +322,6 @@ due to some file-watching issues.
 [cov]: https://coveralls.io
 [cov_img]: https://img.shields.io/coveralls/FormidableLabs/full-stack-testing.svg
 [cov_site]: https://coveralls.io/r/FormidableLabs/full-stack-testing
+[sauce]: https://saucelabs.com/
+[sauce_img]: https://saucelabs.com/u/full-stack-testing
+[sauce_site]: https://saucelabs.com/buildstatus/full-stack-testing
