@@ -40,7 +40,7 @@
     "mocha": "2.2.4",
     "phantomjs": "1.9.16",
     "recluster": "0.4.0",
-    "rowdy": "0.1.4",
+    "rowdy": "0.3.1",
     "selenium-standalone": "4.4.0",
     "sinon": "1.14.1",
     "sinon-chai": "2.7.0",

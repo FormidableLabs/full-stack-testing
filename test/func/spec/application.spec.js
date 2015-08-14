@@ -9,7 +9,8 @@ var ENTER_KEY = wd.SPECIAL_KEYS.Enter;
 
 // Rowdy helpers and adapter.
 var rowdy = require("rowdy");
-var adapter = rowdy.adapters.mocha;
+var MochaAdapter = rowdy.adapters.mocha;
+var adapter = new MochaAdapter();
 var helpers = rowdy.helpers;
 
 describe("func/application", function () {
