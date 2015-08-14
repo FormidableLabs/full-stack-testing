@@ -6,7 +6,7 @@ var PORT = process.env.FUNC_PORT || 3003;
 // var HOST = process.env.TEST_HOST || "http://127.0.0.1:" + PORT;
 
 var rowdy = require("rowdy");
-var adapter = rowdy.adapters.mocha;
+var adapter = new rowdy.adapters.mocha();
 
 describe("YOUR_FUNCTIONAL_TEST_SUITE", function () {
   var client;
