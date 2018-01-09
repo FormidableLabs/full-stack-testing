@@ -36,7 +36,7 @@
     "karma-safari-launcher": "0.1.1",
     "karma-sauce-launcher": "0.2.10",
     "karma-spec-reporter": "0.0.19",
-    "marked": "0.3.3",
+    "marked": "^0.3.9",
     "mocha": "2.2.4",
     "phantomjs": "1.9.16",
     "recluster": "0.4.0",
